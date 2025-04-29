@@ -17,9 +17,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
 
-
 @Preview
 @Composable
 fun Hola(){
-    Texto("texto nose")
+    Text("canbie este texto")
 }
