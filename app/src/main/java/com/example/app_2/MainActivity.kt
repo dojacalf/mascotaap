@@ -44,6 +44,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     App_2Theme {
-        Greeting("este es texto de prueba para git hub el comit nose xd asdfjala aaaaaaa camila cabello")
+        Greeting("texto canbiado por Sebastian en android studio")
     }
 }
