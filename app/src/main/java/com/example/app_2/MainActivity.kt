@@ -47,3 +47,10 @@ fun GreetingPreview() {
         Greeting("texto canbiado por Sebastian en android studio")
     }
 }
+@Preview
+@Composable
+fun App_2Preview() {
+    App_2Theme {
+        Greeting("como estas pablito")
+    }
+}
