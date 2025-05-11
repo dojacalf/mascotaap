@@ -20,37 +20,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             App_2Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hola pablito xdxdxdxdxd $name!",
-        modifier = modifier
-    )
-}
-
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    App_2Theme {
-        Greeting("texto canbiado por Sebastian en android studio")
-    }
-}
-@Preview
-@Composable
-fun App_2Preview() {
-    App_2Theme {
-        Greeting("como estas pablito")
     }
 }
