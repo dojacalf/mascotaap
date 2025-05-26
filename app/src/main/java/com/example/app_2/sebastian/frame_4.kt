@@ -3,19 +3,35 @@ package com.example.app_2.sebastian
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.NavigateBefore
-import androidx.compose.material.icons.automirrored.filled.ReadMore
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -24,6 +40,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.app_2.R
 import com.example.app_2.ui.theme.fredoka
+
+val colorchat = Color(0xFF64ADEF)
+val colorcall = Color(0xFFFB2626)
+val colorcora = Color(0xFFFB2626)
+val caja1 = Color(0xFFE2F5CB)
+val caja2 = Color(0xFFFFE9C2)
+val caja3 = Color(0xFFC2EBFF)
+val caj1 = Color(0xFFCAEDA1)
+val caj2 = Color(0xFFFFD68F)
+val caj3 = Color(0xFFA3E1FF)
+val negro1 = Color(0xFF03063A)
+val negro2 = Color(0xFF70717B)
 
 @Preview
 @Composable
@@ -36,19 +64,17 @@ fun Frame4() {
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            // Parte 1 - Imagen principal con botones superpuestos
+            // Parte superior con la imagen
             Box(
                 modifier = Modifier
-                    .weight(4f)
                     .fillMaxWidth()
+                    .weight(1f) // Usa weight para distribución proporcional
             ) {
                 // Imagen del gato
                 Image(
                     painter = painterResource(id = R.drawable.gato2),
                     contentDescription = "michito 2 el 1 no era jpg",
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(RoundedCornerShape(bottomStart = 30.dp, bottomEnd = 30.dp)),
+                    modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop
                 )
 
@@ -67,18 +93,37 @@ fun Frame4() {
                         .padding(20.dp)
                         .align(Alignment.TopEnd)
                 )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.BottomCenter)
+                        .padding(top = 40.dp) // Esto crea la superposición
+                        .background(
+                            Color.White,
+                            RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)
+                        )
+                        .border(
+                            width = 1.dp,
+                            color = Color.Transparent,
+                            shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)
+                        )
+                        .height(50.dp) // Altura de la parte superpuesta
+                )
             }
 
-            // Contenido inferior con fondo blanco redondeado
+            // Contenido inferior
             Box(
                 modifier = Modifier
-                    .weight(6f)
                     .fillMaxWidth()
-                    .background(
-                        Color.White,
-                        RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)
+                    .weight(1.3f) // Ajusta el peso según necesites
+                    .background(Color.White)
+                    .border(
+                        width = 1.dp,
+                        color = Color.Transparent,
+                        RoundedCornerShape(bottomStart = 30.dp, bottomEnd = 70.dp)
                     )
-                    .padding(20.dp)
+                    .padding(horizontal = 20.dp)
+                    .padding(bottom = 20.dp) // Espacio inferior para mostrar el fondo beige
             ) {
                 Column(
                     modifier = Modifier.fillMaxSize()
@@ -106,9 +151,16 @@ fun Frame4() {
                     }
 
                     // Parte 3 - Información en tarjetas
-                    parte_3(
-                        modifier = Modifier.padding(bottom = 24.dp)
-                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 24.dp),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        TarjetaGenero()
+                        TarjetaEdad()
+                        TarjetaPeso()
+                    }
 
                     // Parte 4 - Información del dueño
                     Row(
@@ -117,14 +169,23 @@ fun Frame4() {
                             .padding(bottom = 16.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        // Imagen del dueño (placeholder circular)
+                        // Imagen del dueño
                         Box(
                             modifier = Modifier
                                 .size(50.dp)
                                 .clip(CircleShape)
                                 .background(Color(0xFFFFB74D))
                                 .border(2.dp, Color.Gray.copy(alpha = 0.3f), CircleShape)
-                        )
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.dcori),
+                                contentDescription = "Dueño",
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .clip(CircleShape),
+                                contentScale = ContentScale.Crop
+                            )
+                        }
 
                         datos_del_dueño(
                             modifier = Modifier
@@ -156,6 +217,136 @@ fun Frame4() {
                     )
                 }
             }
+
+            // Espacio inferior para mostrar el fondo beige
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(30.dp)
+            )
+        }
+    }
+}
+
+// Tarjeta de Género - Componente independiente
+@Composable
+fun TarjetaGenero() {
+    Box(
+        modifier = Modifier
+            .size(width = 90.dp, height = 70.dp)
+            .background(
+                color = caja1,
+                shape = RoundedCornerShape(12.dp)
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.pata1),
+            contentDescription = "Fondo pata",
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(12.dp)),
+            contentScale = ContentScale.Crop,
+            alpha = 0.3f,
+            colorFilter = ColorFilter.tint(caj1)
+        )
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                "Hembra",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                color = negro1
+            )
+            Text(
+                "Género",
+                fontSize = 12.sp,
+                color = negro2
+            )
+        }
+    }
+}
+
+// Tarjeta de Edad - Componente independiente
+@Composable
+fun TarjetaEdad() {
+    Box(
+        modifier = Modifier
+            .size(width = 90.dp, height = 70.dp)
+            .background(
+                color = caja2,
+                shape = RoundedCornerShape(12.dp)
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.pata1),
+            contentDescription = "Fondo pata",
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(12.dp)),
+            contentScale = ContentScale.Crop,
+            alpha = 0.3f,
+            colorFilter = ColorFilter.tint(caj2)
+        )
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                "1 Año",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                color = negro1
+            )
+            Text(
+                "Edad",
+                fontSize = 12.sp,
+                color = negro2
+            )
+        }
+    }
+}
+
+// Tarjeta de Peso - Componente independiente
+@Composable
+fun TarjetaPeso() {
+    Box(
+        modifier = Modifier
+            .size(width = 90.dp, height = 70.dp)
+            .background(
+                color = caja3,
+                shape = RoundedCornerShape(12.dp)
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.pata1),
+            contentDescription = "Fondo pata",
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(12.dp)),
+            contentScale = ContentScale.Crop,
+            alpha = 0.3f,
+            colorFilter = ColorFilter.tint(caj3)
+        )
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                "10 Kg",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                color = negro1
+            )
+            Text(
+                "Peso",
+                fontSize = 12.sp,
+                color = negro2
+            )
         }
     }
 }
@@ -163,7 +354,7 @@ fun Frame4() {
 @Composable
 fun Boton_adoptar(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Button(
         onClick = onClick,
@@ -184,10 +375,10 @@ fun Boton_adoptar(
 
 @Composable
 fun Parte_5_descripcion(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Text(
-        "Konynya es una gata que encontró su lugar en mi mundo, siempre buscando estar cerca para brindarme su companía. Es muy amorosa y le encantan las camas con las personas que no se conforman con lo que tienen, siempre quieren más.",
+        "Korayma es una gata que encontró su lugar en mi mundo, siempre buscando estar cerca para brindarme su compañía. Es muy amorosa y le encantan las camas con las personas que no se conforman con lo que tienen, siempre quieren más.",
         modifier = modifier,
         fontSize = 14.sp,
         color = Color.Gray,
@@ -198,7 +389,7 @@ fun Parte_5_descripcion(
 @Composable
 fun Boton_llamar(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Button(
         onClick = onClick,
@@ -210,10 +401,10 @@ fun Boton_llamar(
         contentPadding = PaddingValues(0.dp)
     ) {
         Icon(
-            imageVector = Icons.AutoMirrored.Filled.NavigateBefore,
+            painter = painterResource(id = R.drawable.llamarsvg),
             contentDescription = "Llamar",
-            tint = Color(0xFFE91E63),
-            modifier = Modifier.size(20.dp)
+            tint = colorcall,
+            modifier = Modifier.size(24.dp)
         )
     }
 }
@@ -221,7 +412,7 @@ fun Boton_llamar(
 @Composable
 fun Boton_mensaje(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Button(
         onClick = onClick,
@@ -233,17 +424,17 @@ fun Boton_mensaje(
         contentPadding = PaddingValues(0.dp)
     ) {
         Icon(
-            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+            painter = painterResource(id = R.drawable.chat4),
             contentDescription = "Mensaje",
-            tint = Color(0xFF2196F3),
-            modifier = Modifier.size(20.dp)
+            tint = colorchat,
+            modifier = Modifier.size(24.dp)
         )
     }
 }
 
 @Composable
 fun datos_del_dueño(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
@@ -255,7 +446,7 @@ fun datos_del_dueño(
             color = Color.Black
         )
         Text(
-            "Dueño del mascota",
+            "Dueño de Korayma",
             fontSize = 14.sp,
             color = Color.Gray
         )
@@ -264,7 +455,7 @@ fun datos_del_dueño(
 
 @Composable
 fun nombre_de_mascota(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Text(
         "Kitty",
@@ -279,7 +470,7 @@ fun nombre_de_mascota(
 @Composable
 fun boton_2_puntos(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Button(
         onClick = onClick,
@@ -291,10 +482,13 @@ fun boton_2_puntos(
         ),
         contentPadding = PaddingValues(0.dp)
     ) {
-        Icon(
-            imageVector = Icons.AutoMirrored.Filled.ReadMore,
-            contentDescription = "Menú",
-            modifier = Modifier.size(20.dp)
+        Image(
+            painter = painterResource(id = R.drawable.dosp),
+            contentDescription = "Menu",
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(CircleShape),
+            contentScale = ContentScale.Crop
         )
     }
 }
@@ -302,7 +496,7 @@ fun boton_2_puntos(
 @Composable
 fun boton_retroceder(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Button(
         onClick = onClick,
@@ -325,7 +519,7 @@ fun boton_retroceder(
 @Composable
 fun boton_de_like(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     var isLiked by remember { mutableStateOf(false) }
 
@@ -334,98 +528,47 @@ fun boton_de_like(
             isLiked = !isLiked
             onClick()
         },
-        modifier = modifier.size(45.dp),
+        modifier = modifier.size(40.dp),
         shape = CircleShape,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color.White,
-            contentColor = if (isLiked) Color.Red else Color.Gray
+            containerColor = Color.White
+        ),
+        elevation = ButtonDefaults.buttonElevation(
+            defaultElevation = 8.dp,
+            pressedElevation = 4.dp
         ),
         contentPadding = PaddingValues(0.dp)
     ) {
-        Text(
-            if (isLiked) "❤️" else "🤍",
-            fontSize = 20.sp
+        Icon(
+            painter = painterResource(id = R.drawable.cora),
+            contentDescription = "Corazón",
+            tint = if (isLiked) colorcora else colorcora,
+            modifier = Modifier.size(24.dp)
         )
     }
 }
 
 @Composable
 fun Ubicacion(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            "📍",
-            fontSize = 14.sp,
-            modifier = Modifier.padding(end = 4.dp)
+        Icon(
+            painter = painterResource(id = R.drawable.aqui),
+            contentDescription = "Ubicación",
+            tint = Color(0xFF2196F3),
+            modifier = Modifier
+                .size(14.dp)
+                .padding(end = 4.dp)
         )
         Text(
-            "Sabanilla, Puno (7km)",
+            "Bellavista, Puno (5km)",
             fontSize = 14.sp,
             color = Color(0xFF2196F3),
             fontFamily = fredoka
         )
-    }
-}
-
-@Composable
-fun parte_3(
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        DetailCard(
-            title = "Hembra",
-            subtitle = "Género",
-            backgroundColor = Color(0xFFE8F5E8)
-        )
-        DetailCard(
-            title = "1 Año",
-            subtitle = "Edad",
-            backgroundColor = Color(0xFFFFF3E0)
-        )
-        DetailCard(
-            title = "10 Kg",
-            subtitle = "Peso",
-            backgroundColor = Color(0xFFE3F2FD)
-        )
-    }
-}
-
-@Composable
-fun DetailCard(
-    title: String,
-    subtitle: String,
-    backgroundColor: Color
-) {
-    Box(
-        modifier = Modifier
-            .size(width = 90.dp, height = 70.dp)
-            .background(
-                color = backgroundColor,
-                shape = RoundedCornerShape(12.dp)
-            ),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                title,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
-            )
-            Text(
-                subtitle,
-                fontSize = 12.sp,
-                color = Color.Gray
-            )
-        }
     }
 }

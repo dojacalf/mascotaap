@@ -48,7 +48,10 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("androidx.compose.material:material-icons-extended:1.3.2")
+    implementation("androidx.compose.material:material-icons-extended:1.6.7") // Considera usar una versión más reciente o gestionarla con la BOM.
+    // implementation(libs.androidx.navigation.runtime.android) // Puedes comentar o eliminar esta si tu app es solo Compose.
+    implementation(libs.androidx.navigation.compose) // <<< CAMBIA A ESTA (o el alias correcto que tengas en libs.versions.toml para androidx.navigation:navigation-compose)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -56,5 +59,4 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
 }
