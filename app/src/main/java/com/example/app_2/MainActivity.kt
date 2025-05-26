@@ -50,10 +50,10 @@ fun NavigationApp() {
             Registro()
         }
         composable("encuentra1") {
-            PetScreen()
+            PetScreen(navController = navController)
         }
-        composable("principal") {
-            PantallaPrincipal()
+        composable("principal") { // Asumiendo que "principal" es la ruta para PantallaPrincipal
+            PantallaPrincipal(navController = navController) // <-- PASA EL NAVCONTROLLER AQUÍ
         }
         composable("registrar_mascota") {
             PantallaRegistroMascota()

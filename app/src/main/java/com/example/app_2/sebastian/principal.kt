@@ -22,8 +22,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.app_2.Provarjetpack.plomo1
+import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.clickable // <
 import com.example.app_2.R
+import androidx.navigation.NavController // <-- IMPORTANTE: Añade esta importación
+
 
 // Colores personalizados
 val colorKorayma = Color(0xFFFFF5E6)
@@ -32,7 +36,7 @@ val colorBanner = Color(0xFF5DADE2)
 val fondoApp = Color(0xFFFAFAFA)
 
 @Composable
-fun PantallaPrincipal() {
+fun PantallaPrincipal(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -40,7 +44,8 @@ fun PantallaPrincipal() {
     ) {
         // Header Section
         HeaderSection(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 20.dp)
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 20.dp),
+            navController = navController // <-- Pasa NavController a HeaderSection
         )
 
         // Content Section
@@ -66,7 +71,8 @@ fun PantallaPrincipal() {
 }
 
 @Composable
-fun HeaderSection(modifier: Modifier = Modifier) {
+fun HeaderSection( modifier: Modifier = Modifier,
+                   navController: NavController ) {
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -76,7 +82,7 @@ fun HeaderSection(modifier: Modifier = Modifier) {
         LocationInfo()
 
         // Action Icons Row
-        ActionIcons()
+        ActionIcons(navController = navController)
     }
 }
 
@@ -97,7 +103,7 @@ fun LocationInfo() {
 }
 
 @Composable
-fun ActionIcons() {
+fun ActionIcons(navController: NavController) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -119,29 +125,40 @@ fun ActionIcons() {
         )
 
         // Profile Picture
-        ProfileImage()
+        ProfileImage(
+            navController = navController,
+            destinationRoute = "perfil usuario" // O la ruta correcta a tu pantalla de perfil
+        )
     }
 }
 
 @Composable
-fun ProfileImage() {
+fun ProfileImage(
+    navController: NavController, // Parámetro para controlar la navegación
+    destinationRoute: String      // Parámetro para la ruta a la que quieres navegar
+) {
     Box(
         modifier = Modifier
             .size(40.dp)
             .clip(CircleShape)
             .background(Color(0xFFFFB74D))
             .border(2.dp, Color.Gray.copy(alpha = 0.3f), CircleShape)
+            .clickable {
+                // Acción de navegación al hacer clic
+                navController.navigate(destinationRoute)
+            }
     ) {
         Image(
-            painter = painterResource(id = R.drawable.dcori),
+            painter = painterResource(id = R.drawable.dcori), // Asegúrate que este recurso exista
             contentDescription = "Perfil",
             modifier = Modifier
                 .fillMaxSize()
-                .clip(CircleShape),
+                .clip(CircleShape), // Aplicar clip también a la imagen si es necesario
             contentScale = ContentScale.Crop
         )
     }
 }
+
 
 @Composable
 fun BannerSection() {
@@ -437,5 +454,5 @@ data class Mascota(
 @Preview
 @Composable
 fun PantallaPrincipalPreview() {
-    PantallaPrincipal()
+    PantallaPrincipal(navController = androidx.navigation.compose.rememberNavController())
 }

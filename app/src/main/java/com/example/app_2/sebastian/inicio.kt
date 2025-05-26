@@ -162,9 +162,11 @@ private fun LoginSection(
                 fontSize = 30.sp, //
                 fontFamily = Fredoka //
             ),
-            modifier = Modifier.padding(bottom = 20.dp).clickable { //
-                navController.navigate("registro")
-            } //
+            modifier = Modifier
+                .padding(bottom = 20.dp)
+                .clickable { //
+                    navController.navigate("registro")
+                } //
 
         )
 
