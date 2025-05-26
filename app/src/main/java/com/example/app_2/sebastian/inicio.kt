@@ -14,8 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-// Asegúrate de tener solo una importación para Text de Material 3
-import androidx.compose.material3.Text // Correcto si usas Material 3
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,15 +31,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.app_2.R
-import com.example.app_2.ui.theme.fredoka // Asegúrate que este import sea correcto o define fredoka aquí
-import androidx.navigation.NavController // Importa NavController
-// import androidx.navigation.compose.rememberNavController // Ya no es necesario aquí
+import com.example.app_2.ui.theme.fredoka
+import androidx.navigation.NavController
+// import androidx.navigation.compose.rememberNavController
 
 
 
-val Fredoka = FontFamily(Font(R.font.fredoka_semibold)) //
-
-// @Preview // El Preview no podrá pasar un NavController real, puedes comentarlo o usar un NavController de prueba
+val Fredoka = FontFamily(Font(R.font.fredoka_semibold))
+val Fredoka1 = FontFamily(Font(R.font.fredoka_regular))
+// @Preview
 @Composable
 fun InicioScreen(navController: NavController) { // Acepta NavController como parámetro
 
@@ -185,8 +184,6 @@ private fun LoginSection(
     }
 }
 
-// Para el Preview de InicioScreen, si quieres que funcione sin errores de NavController:
-@Preview(showBackground = true)
 @Composable
 fun InicioScreenPreview() {
 
@@ -201,8 +198,6 @@ fun InicioScreenPreview() {
 
 @Composable
 private fun WelcomeSectionPreviewHelper(modifier: Modifier = Modifier) {
-    // Esta es una versión simplificada de WelcomeSection para el Preview
-    // sin la lógica de navegación real.
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -211,7 +206,7 @@ private fun WelcomeSectionPreviewHelper(modifier: Modifier = Modifier) {
     ) {
         Text(
             text = "Hey! ¡Bienvenido! \uD83D\uDE0A",
-            style = TextStyle(fontSize = 30.sp, fontFamily = Fredoka),
+            style = TextStyle(fontSize = 35.sp, fontFamily = Fredoka),
             modifier = Modifier.padding(vertical = 15.dp)
         )
         Text(
@@ -220,7 +215,7 @@ private fun WelcomeSectionPreviewHelper(modifier: Modifier = Modifier) {
                 append("Cada Historia Merece Un Final\n")
                 append("Feliz 💗")
             },
-            style = TextStyle(fontSize = 20.sp, fontFamily = fredoka, lineHeight = 23.sp),
+            style = TextStyle(fontSize = 18.sp, fontFamily = fredoka, lineHeight = 23.sp),
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 30.dp)
         )
@@ -237,12 +232,12 @@ private fun LoginSectionPreviewHelper(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Crea Una cuenta",
+            text = "Crea una cuenta",
             style = TextStyle(fontSize = 30.sp, fontFamily = Fredoka),
             modifier = Modifier.padding(bottom = 20.dp)
         )
         Text(
-            text = "Iniciar Sesión",
+            text = "Iniciar sesión",
             style = TextStyle(fontSize = 30.sp, fontWeight = FontWeight.W700, fontFamily = Fredoka, color = amarillo),
             modifier = Modifier.clickable { /* En Preview, no hace nada */ }
         )

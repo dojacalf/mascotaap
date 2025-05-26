@@ -48,9 +48,27 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("androidx.compose.material:material-icons-extended:1.6.7") // Considera usar una versión más reciente o gestionarla con la BOM.
-    // implementation(libs.androidx.navigation.runtime.android) // Puedes comentar o eliminar esta si tu app es solo Compose.
-    implementation(libs.androidx.navigation.compose) // <<< CAMBIA A ESTA (o el alias correcto que tengas en libs.versions.toml para androidx.navigation:navigation-compose)
+    implementation("androidx.compose.material:material-icons-extended:1.6.7")
+    // implementation(libs.androidx.navigation.runtime.android)
+    implementation(libs.androidx.navigation.compose)
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+
+
+
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.compose.googlefonts)
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.5.0")
+    implementation("androidx.compose.ui:ui-text:1.5.0")
+    implementation("com.google.android.gms:play-services-maps:19.2.0")
+    implementation ("com.google.android.gms:play-services-location:21.2.0")
+
+    implementation ("com.google.maps.android:maps-compose:2.11.4")
+    implementation ("com.google.android.gms:play-services-maps:18.1.0")
+
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.compose.material:material-icons-extended:1.5.4")
+    // Coil para Jetpack Compose
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
