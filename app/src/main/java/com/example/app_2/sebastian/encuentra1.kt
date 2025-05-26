@@ -18,11 +18,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 
-@Preview
 @Composable
-fun PetScreen() {
+fun PetScreen(navController: NavController) {
     Box(modifier = Modifier.fillMaxSize()) {
 
         Image(
@@ -99,7 +103,9 @@ fun PetScreen() {
                 Spacer(modifier = Modifier.height(48.dp))
 
                 Button(
-                    onClick = { /* Vacío */ },
+                    onClick = {
+                        navController.navigate("principal")
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF64ADEF),
                         contentColor = Color.White
