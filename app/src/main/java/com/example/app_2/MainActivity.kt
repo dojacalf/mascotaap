@@ -12,6 +12,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.app_2.Provarjetpack.InicioScreen
 import com.example.app_2.Provarjetpack.LoginScreen
 import com.example.app_2.Provarjetpack.Registro
+import com.example.app_2.sebastian.PantallaPerfilUsuario
+import com.example.app_2.sebastian.PantallaPrincipal
+import com.example.app_2.sebastian.PantallaRegistroMascota
 import com.example.app_2.sebastian.PetScreen
 import com.example.app_2.sebastian.PreviewPantallaRegistroMascota
 
@@ -23,7 +26,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             // Es buena práctica envolver tu navegación en tu tema de la App si tienes uno
             // TuAppTheme {
-            PreviewPantallaRegistroMascota()
+            NavigationApp()
             // }
         }
     }
@@ -35,23 +38,28 @@ fun NavigationApp() {
 
     NavHost(
         navController = navController,
-        startDestination = "inicio_screen"// Iniciar en InicioScreen
+        startDestination = "inicio_screen"
     ) {
         composable("inicio_screen") {
-            // Pasa el navController a InicioScreen
             InicioScreen(navController = navController)
         }
         composable("login_screen") {
-            LoginScreen() // Asumo que LoginScreen no necesita el navController directamente para su contenido inicial
-            // o que lo gestiona internamente si tiene más navegación.
+            LoginScreen()
         }
         composable("registro") {
-            Registro()// Asumo que LoginScreen no necesita el navController directamente para su contenido inicial
-            // o que lo gestiona internamente si tiene más navegación.
+            Registro()
         }
         composable("encuentra1") {
-            PetScreen()// Asumo que LoginScreen no necesita el navController directamente para su contenido inicial
-            // o que lo gestiona internamente si tiene más navegación.
+            PetScreen()
+        }
+        composable("principal") {
+            PantallaPrincipal()
+        }
+        composable("registrar_mascota") {
+            PantallaRegistroMascota()
+        }
+        composable("perfil usuario") {
+            PantallaPerfilUsuario()
         }
 
     }
