@@ -1,13 +1,13 @@
-package com.example.szapana.core.navigation
+/*package com.example.app_2.core.navigation
 
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.example.szapana.HomeScreen
-import com.example.szapana.LoginScreen
-import com.example.szapana.ui.theme.DetailScreen
+import com.example.app_2.HomeScreen
+import com.example.app_2.LoginScreen
+import com.example.app_2.ui.theme.DetailScreen
 
 
 @Composable
@@ -26,3 +26,4 @@ fun NavigationWrapper() {
         }
     }
 }
+*/
