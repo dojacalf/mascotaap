@@ -1,8 +1,7 @@
-package com.example.app_2.sebastian
+package com.example.app_2.screns
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -23,10 +22,11 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun SearchScreen() {
+fun SearchScreen(navController: NavController) {
     var searchText by remember { mutableStateOf(TextFieldValue("")) }
     val focusRequester = remember { FocusRequester() }
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -44,7 +44,7 @@ fun SearchScreen() {
                 .padding(8.dp)
         ) {
             IconButton(
-                onClick = { /* Acción para el botón de retroceso */ }
+                onClick = { navController.navigateUp() }
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
@@ -105,7 +105,7 @@ fun SearchScreen() {
         focusRequester.requestFocus()
     }
 }
-
+/*
 @Preview(showBackground = true)
 @Composable
 fun SearchScreenPreview() {
@@ -113,3 +113,5 @@ fun SearchScreenPreview() {
         SearchScreen()
     }
 }
+
+ */

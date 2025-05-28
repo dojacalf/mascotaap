@@ -1,8 +1,8 @@
-package com.example.app_2.sebastian
+package com.example.app_2.screns
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,13 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.app_2.R
+import androidx.navigation.NavController
+import androidx.navigation.Navigator
 
 // Colores personalizados para el chat
 val LightGreen = Color(0xFFE2F7D2)
@@ -31,26 +30,22 @@ val BackgroundGreen = Color(0xFFECF9E0)
 val LightBlue = Color(0xFFDCF8FF)
 val SendButtonBlue = Color(0xFF267DFF)
 
-@Preview(showBackground = true)
+
 @Composable
-fun ChatSimpleScreen() {
+fun ChatSimpleScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
-        // Fondo verde claro con patrón de huellas
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(BackgroundGreen)
         )
-
-        // Contenido principal
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            // Cabecera de chat
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -63,12 +58,14 @@ fun ChatSimpleScreen() {
                         .padding(horizontal = 8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Botón Atrás
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = "Volver",
                         tint = Color.Black,
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp).clickable {
+                            navController.navigateUp()
+                        }
+
                     )
 
                     // Avatar del contacto
@@ -142,6 +139,7 @@ fun ChatSimpleScreen() {
 
                     // Campo de texto (simulado)
                     Box(
+
                         modifier = Modifier
                             .weight(1f)
                             .height(40.dp)
@@ -158,7 +156,7 @@ fun ChatSimpleScreen() {
                         contentAlignment = Alignment.CenterStart
                     ) {
                         Text(
-                            text = "Mi perro tiene todas las vacunas!",
+                            text = "",
                             color = Color.Gray,
                             fontSize = 14.sp
                         )
@@ -186,9 +184,10 @@ fun ChatSimpleScreen() {
 
             // Barra navegación inferior
             Divider(
-                color = Color.Black,
-                thickness = 4.dp
+                color = Color.Transparent,
+                thickness = 20.dp
             )
         }
     }
 }
+

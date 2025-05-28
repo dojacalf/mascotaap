@@ -1,4 +1,4 @@
-package com.example.app_2.sebastian
+package com.example.app_2.screns
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.app_2.R
 import com.example.app_2.ui.theme.fredoka
+import androidx.navigation.NavController
 
 val colorchat = Color(0xFF64ADEF)
 val colorcall = Color(0xFFFB2626)
@@ -53,9 +54,9 @@ val caj3 = Color(0xFFA3E1FF)
 val negro1 = Color(0xFF03063A)
 val negro2 = Color(0xFF70717B)
 
-@Preview
+
 @Composable
-fun Frame4() {
+fun Frame4(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -73,14 +74,14 @@ fun Frame4() {
                 // Imagen del gato
                 Image(
                     painter = painterResource(id = R.drawable.gato2),
-                    contentDescription = "michito 2 el 1 no era jpg",
+                    contentDescription = "foto del gato",
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop
                 )
 
                 // Botón retroceder
                 boton_retroceder(
-                    onClick = { /* Acción cuando se presiona */ },
+                    onClick = { navController.navigateUp() },
                     modifier = Modifier
                         .padding(20.dp)
                         .align(Alignment.TopStart)
@@ -111,7 +112,6 @@ fun Frame4() {
                 )
             }
 
-            // Contenido inferior
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -194,7 +194,7 @@ fun Frame4() {
                         )
 
                         Boton_mensaje(
-                            onClick = { /* Acción cuando se presiona */ },
+                            onClick = { navController.navigate("chat") },
                             modifier = Modifier.padding(end = 8.dp)
                         )
 

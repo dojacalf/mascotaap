@@ -1,4 +1,4 @@
-package com.example.app_2.sebastian
+package com.example.app_2.screns
 
 import android.content.Context
 import android.graphics.Bitmap

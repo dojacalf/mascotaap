@@ -1,13 +1,13 @@
-package com.example.app_2.sebastian
+package com.example.app_2.screns
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.*
@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.app_2.R
 
 // Colores personalizados
@@ -30,9 +31,9 @@ val DividerColor = Color(0xFFEEEEEE)
 val TextPrimaryColor = Color(0xFF000000)
 val TextSecondaryColor = Color(0xFF8A8A8E)
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
-fun AjustesScreen() {
+fun AjustesScreen(navController: NavController) {
     // Estados para los switches
     var modoOscuroActivado by remember { mutableStateOf(false) }
     var accesoUbicacionActivado by remember { mutableStateOf(true) }
@@ -65,13 +66,18 @@ fun AjustesScreen() {
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = "Volver",
                     tint = Color.Black,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clickable {
+                            navController.navigateUp()
+                        }
                 )
 
                 Spacer(modifier = Modifier.width(16.dp))
 
                 Text(
                     text = "Ajustes",
+                    modifier = Modifier.padding(20.dp),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = TextPrimaryColor
@@ -94,21 +100,19 @@ fun AjustesScreen() {
                     .padding(vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Icono circular azul
+
                 Box(
                     modifier = Modifier
                         .size(36.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFFE3F2FD)),
+                        .background(Color(0xFFE8E0FF)),
                     contentAlignment = Alignment.Center
-                ) {/*
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_clock),
-                        contentDescription = "Huso horario",
-                        tint = Color(0xFF2196F3),
-                        modifier = Modifier.size(20.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.p1),
+                        contentDescription = "Añadir",
+                        modifier = Modifier
+                            .fillMaxSize()
                     )
-                    */
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -117,7 +121,7 @@ fun AjustesScreen() {
                     modifier = Modifier.weight(1f)
                 ) {
                     Text(
-                        text = "Huso horario",
+                        text = "Uso horario",
                         fontSize = 16.sp,
                         color = TextPrimaryColor
                     )
@@ -144,23 +148,18 @@ fun AjustesScreen() {
                     .padding(vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Icono circular violeta
                 Box(
                     modifier = Modifier
                         .size(36.dp)
-                        .clip(CircleShape)
                         .background(Color(0xFFE8E0FF)),
                     contentAlignment = Alignment.Center
                 ) {
-                    /*
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_language),
-                        contentDescription = "Idioma",
-                        tint = Color(0xFF7C4DFF),
-                        modifier = Modifier.size(20.dp)
-                  )
-
-                     */
+                    Image(
+                        painter = painterResource(id = R.drawable.p2),
+                        contentDescription = "Añadir",
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -196,20 +195,18 @@ fun AjustesScreen() {
                     .padding(vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Icono circular naranja
                 Box(
                     modifier = Modifier
                         .size(36.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFFFFECB3)),
+                        .background(Color(0xFFE8E0FF)),
                     contentAlignment = Alignment.Center
-                ) {/*
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_dark_mode),
-                        contentDescription = "Modo oscuro",
-                        tint = Color(0xFFFF9800),
-                        modifier = Modifier.size(20.dp)
-                    )*/
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.p3),
+                        contentDescription = "Añadir",
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -259,20 +256,18 @@ fun AjustesScreen() {
                     .padding(vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Icono circular verde
                 Box(
                     modifier = Modifier
                         .size(36.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFFE0F2F1)),
+                        .background(Color(0xFFE8E0FF)),
                     contentAlignment = Alignment.Center
-                ) {/*
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_location),
-                        contentDescription = "Ubicación",
-                        tint = Color(0xFF4CAF50),
-                        modifier = Modifier.size(20.dp)
-                    )*/
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.p4),
+                        contentDescription = "Añadir",
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -313,20 +308,18 @@ fun AjustesScreen() {
                     .padding(vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Icono circular morado
                 Box(
                     modifier = Modifier
                         .size(36.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFFF3E5F5)),
+                        .background(Color(0xFFE8E0FF)),
                     contentAlignment = Alignment.Center
-                ) {/*
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_photo),
-                        contentDescription = "Fotos",
-                        tint = Color(0xFF9C27B0),
-                        modifier = Modifier.size(20.dp)
-                    )*/
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.p5),
+                        contentDescription = "Añadir",
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -376,22 +369,19 @@ fun AjustesScreen() {
                     .padding(vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Icono circular amarillo
                 Box(
                     modifier = Modifier
                         .size(36.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFFFFF9C4)),
+                        .background(Color(0xFFE8E0FF)),
                     contentAlignment = Alignment.Center
-                ) {/*
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_notification),
-                        contentDescription = "Notificaciones",
-                        tint = Color(0xFFFFD600),
-                        modifier = Modifier.size(20.dp)
-                    )*/
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.p6),
+                        contentDescription = "Añadir",
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
                 }
-
                 Spacer(modifier = Modifier.width(16.dp))
 
                 Column(
@@ -430,21 +420,18 @@ fun AjustesScreen() {
                     .padding(vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Icono circular amarillo-naranja
                 Box(
                     modifier = Modifier
                         .size(36.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFFFFE0B2)),
+                        .background(Color(0xFFE8E0FF)),
                     contentAlignment = Alignment.Center
-                ) {/*
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_email),
-                        contentDescription = "Correo",
-                        tint = Color(0xFFFF9800),
-                        modifier = Modifier.size(20.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.p7),
+                        contentDescription = "Añadir",
+                        modifier = Modifier
+                            .fillMaxSize()
                     )
-                    */
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))

@@ -42,6 +42,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.app_2.R
 import com.example.app_2.ui.theme.fredoka
 
@@ -54,11 +55,8 @@ val FacebookBlue = Color(0xFF3b5998)
 val plomo1 = Color(0xFFA6A6A6)
 val color1 = Color(0xFF3b5998)
 
-
-
-@Preview(showBackground = true)
 @Composable
-fun Registro() {
+fun Registro(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var rememberPassword by remember { mutableStateOf(false) }
@@ -299,7 +297,7 @@ fun Registro() {
 
             // Botón de registro
             Button(
-                onClick = { /* Acción de registro */ },
+                onClick = { navController.navigate("principal")},
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),

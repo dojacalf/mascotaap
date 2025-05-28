@@ -11,11 +11,18 @@ import androidx.navigation.compose.rememberNavController
 import com.example.app_2.Provarjetpack.InicioScreen
 import com.example.app_2.Provarjetpack.LoginScreen
 import com.example.app_2.Provarjetpack.Registro
-import com.example.app_2.sebastian.PantallaPerfilUsuario
-import com.example.app_2.sebastian.PantallaPrincipal
-import com.example.app_2.sebastian.PantallaRegistroMascota
-import com.example.app_2.sebastian.PetScreen
-import com.example.app_2.sebastian.PreviewPantallaRegistroMascota
+import com.example.app_2.Provarjetpack.carga
+import com.example.app_2.screns.AjustesScreen
+import com.example.app_2.screns.ChatSimpleScreen
+import com.example.app_2.screns.Frame4
+import com.example.app_2.screns.NotificationsScreen
+import com.example.app_2.screns.PantallaPerfilUsuario
+import com.example.app_2.screns.PantallaPrincipal
+import com.example.app_2.screns.PantallaRegistroMascota
+import com.example.app_2.screns.PetScreen
+import com.example.app_2.screns.RegistroMascota
+import com.example.app_2.screns.SearchScreen
+import perfilpets
 
 
 class MainActivity : ComponentActivity() {
@@ -23,10 +30,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            // Es buena práctica envolver tu navegación en tu tema de la App si tienes uno
-            // TuAppTheme {
             NavigationApp()
-            // }
+            //Frame4()
         }
     }
 }
@@ -37,29 +42,50 @@ fun NavigationApp() {
 
     NavHost(
         navController = navController,
-        startDestination = "inicio_screen"
+        startDestination = "carga"
     ) {
+        composable("carga") {
+            carga(navController = navController)
+        }
         composable("inicio_screen") {
             InicioScreen(navController = navController)
         }
         composable("login_screen") {
-            LoginScreen()
+            LoginScreen(navController = navController)
         }
         composable("registro") {
-            Registro()
+            Registro(navController = navController)
         }
         composable("encuentra1") {
             PetScreen(navController = navController)
         }
-        composable("principal") { // Asumiendo que "principal" es la ruta para PantallaPrincipal
-            PantallaPrincipal(navController = navController) // <-- PASA EL NAVCONTROLLER AQUÍ
+        composable("principal") {
+            PantallaPrincipal(navController = navController)
         }
         composable("registrar_mascota") {
-            PantallaRegistroMascota()
+            RegistroMascota(onSubmit = { navController.navigate("principal") })
         }
         composable("perfil usuario") {
-            PantallaPerfilUsuario()
+            PantallaPerfilUsuario(navController = navController)
+        }
+        composable("busqueda") {
+            SearchScreen(navController= navController)
+        }
+        composable("notificaciones") {
+            NotificationsScreen()
+        }
+        composable("mascota") {
+            Frame4(navController = navController)
+        }
+        composable("chat") {
+            ChatSimpleScreen(navController= navController)
+        }
+        composable("configuracion") {
+            AjustesScreen(navController= navController)
         }
 
+        composable("ver_todo") {
+            perfilpets()
+        }
     }
 }

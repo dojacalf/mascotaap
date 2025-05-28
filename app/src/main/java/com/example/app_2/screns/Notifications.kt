@@ -1,4 +1,4 @@
-package com.example.app_2.sebastian
+package com.example.app_2.screns
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image

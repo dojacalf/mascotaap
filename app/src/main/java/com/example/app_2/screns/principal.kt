@@ -1,4 +1,4 @@
-package com.example.app_2.sebastian
+package com.example.app_2.screns
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,11 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.draw.clip
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.clickable // <
 import com.example.app_2.R
-import androidx.navigation.NavController // <-- IMPORTANTE: Añade esta importación
+import androidx.navigation.NavController
 
 
 // Colores personalizados
@@ -65,14 +62,16 @@ fun PantallaPrincipal(navController: NavController) {
             Spacer(modifier = Modifier.height(60.dp))
 
             // Pets Section
-            PetsSection()
+            PetsSection(navController = navController)
         }
     }
 }
 
 @Composable
-fun HeaderSection( modifier: Modifier = Modifier,
-                   navController: NavController ) {
+fun HeaderSection(
+    modifier: Modifier = Modifier,
+    navController: NavController,
+) {
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -113,21 +112,28 @@ fun ActionIcons(navController: NavController) {
             painter = painterResource(id = R.drawable.buscar),
             contentDescription = "Buscar",
             tint = Color.Gray,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier
+                .size(24.dp)
+                .clickable {
+                    navController.navigate("busqueda")
+                }
         )
 
         // Notification Icon
         Icon(
             painter = painterResource(id = R.drawable.noti),
-            contentDescription = "Notificaciones",
+            contentDescription = "Buscar",
             tint = Color.Gray,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier
+                .size(24.dp)
+                .clickable {
+                    // Navegar a la pantalla de búsqueda
+                    navController.navigate("notificaciones")
+                }
         )
-
-        // Profile Picture
         ProfileImage(
             navController = navController,
-            destinationRoute = "perfil usuario" // O la ruta correcta a tu pantalla de perfil
+            destinationRoute = "perfil usuario"
         )
     }
 }
@@ -135,7 +141,7 @@ fun ActionIcons(navController: NavController) {
 @Composable
 fun ProfileImage(
     navController: NavController, // Parámetro para controlar la navegación
-    destinationRoute: String      // Parámetro para la ruta a la que quieres navegar
+    destinationRoute: String,      // Parámetro para la ruta a la que quieres navegar
 ) {
     Box(
         modifier = Modifier
@@ -248,7 +254,7 @@ fun CategoriesList() {
 fun CategoryChip(
     text: String,
     isSelected: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -269,18 +275,18 @@ fun CategoryChip(
 }
 
 @Composable
-fun PetsSection() {
+fun PetsSection(navController: NavController) {
     Column {
-        PetsSectionHeader()
+        PetsSectionHeader(navController = navController)
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        PetsList()
+        PetsList(navController = navController)
     }
 }
 
 @Composable
-fun PetsSectionHeader() {
+fun PetsSectionHeader(navController: NavController) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -296,16 +302,17 @@ fun PetsSectionHeader() {
             "Ver todo",
             color = Color(0xFFFF9800),
             fontSize = 12.sp,
-            modifier = Modifier.clickable { }
+            modifier = Modifier.clickable { navController.navigate("ver_todo")}
         )
     }
 }
 
 @Composable
-fun PetsList() {
+fun PetsList(navController: NavController) {
     val mascotas = listOf(
         Mascota("Korayma", "5km", colorKorayma, R.drawable.gato2),
-        Mascota("Kitty", "7km", colorKitty, R.drawable.gatoxd)
+        Mascota("Kitty", "7km", colorKitty, R.drawable.gatoxd),
+        Mascota("Kitty", "7km", colorKitty, R.drawable.gato3)
     )
 
     LazyRow(
@@ -313,15 +320,19 @@ fun PetsList() {
         contentPadding = PaddingValues(end = 16.dp)
     ) {
         items(mascotas.size) { index ->
-            PetCard(mascota = mascotas[index])
+            PetCard(mascota = mascotas[index], navController = navController)
         }
     }
 }
 
 @Composable
-fun PetCard(mascota: Mascota) {
+fun PetCard(mascota: Mascota, navController: NavController) {
     Card(
         modifier = Modifier
+            .clickable {
+                // Navegar a la pantalla de búsqueda
+                navController.navigate("mascota")
+            }
             .width(170.dp)
             .height(300.dp),
         shape = RoundedCornerShape(20.dp),
@@ -414,7 +425,7 @@ fun FavoriteButton() {
 fun PetImage(
     imageResId: Int,
     nombre: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier) {
         Image(
@@ -448,7 +459,7 @@ data class Mascota(
     val nombre: String,
     val distancia: String,
     val colorFondo: Color,
-    val imagenResId: Int
+    val imagenResId: Int,
 )
 
 @Preview

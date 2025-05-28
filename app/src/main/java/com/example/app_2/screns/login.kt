@@ -25,15 +25,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.app_2.R
 import com.example.app_2.ui.theme.fredoka
 
-// Assuming 'amarillo' is defined elsewhere, e.g., in your Colors.kt
-val amarillo = Color(0xFFF4B500) // Example yellow color, replace with your actual 'amarillo'
 
-@Preview(showBackground = true)
+val amarillo = Color(0xFFF4B500)
+
 @Composable
-fun LoginScreen() {
+fun LoginScreen( navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -55,7 +55,7 @@ fun LoginScreen() {
                 password = password,
                 onPasswordChange = { password = it },
                 onForgotPasswordClick = { /* TODO: Implement forgot password */ },
-                onLoginClick = { /* TODO: Implement login logic */ },
+                onLoginClick = { navController.navigate("principal")},
                 modifier = Modifier.weight(2f) // Increased weight for better visibility
             )
 

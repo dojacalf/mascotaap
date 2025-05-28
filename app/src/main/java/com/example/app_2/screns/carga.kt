@@ -14,12 +14,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.app_2.R
 import com.example.app_2.ui.theme.fredoka
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.runtime.LaunchedEffect
+import kotlinx.coroutines.delay
 
-@Preview(showBackground = true)
 @Composable
-fun App_2Preview() {
+fun carga(navController: NavController) {
+
+    LaunchedEffect(Unit) {
+        delay(3000) // Espera 3 segundos
+        navController.navigate("inicio_screen") {
+            popUpTo("carga_screen") { inclusive = true } // Elimina la pantalla de carga del stack
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize(),

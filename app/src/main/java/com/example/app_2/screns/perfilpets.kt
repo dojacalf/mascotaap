@@ -46,7 +46,7 @@ data class Pet(
 fun perfilpets() {
     val pets = remember {
         listOf(
-            Pet("1", "Alex", R.drawable.mujer_mascota),
+            Pet("1", "tatiana", R.drawable.mujer_mascota),
             Pet("2", "Castillo", R.drawable.mujer_mascota),
             Pet("3", "Pedro", R.drawable.mujer_mascota),
             Pet("4", "Boluerte", R.drawable.mujer_mascota),

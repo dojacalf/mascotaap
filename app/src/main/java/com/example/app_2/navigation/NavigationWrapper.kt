@@ -25,5 +25,4 @@ fun NavigationWrapper() {
             DetailScreen{navController.navigateUp()}
         }
     }
-}
-*/
+}*/

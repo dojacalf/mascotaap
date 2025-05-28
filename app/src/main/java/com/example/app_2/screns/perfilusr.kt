@@ -1,4 +1,4 @@
-package com.example.app_2.sebastian
+package com.example.app_2.screns
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,15 +22,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.app_2.R
 
 @Composable
-fun PantallaPerfilUsuario() {
+fun PantallaPerfilUsuario(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFF5F5F5)), // Fondo gris claro
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         // Sección superior con imagen de fondo y foto de perfil
         Box(
@@ -169,30 +170,38 @@ fun PantallaPerfilUsuario() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 16.dp),
         ) {
             OpcionMenuMejorada(
                 icono = R.drawable.ic_perfil,
                 texto = "Acerca de mí",
-                flechaIcono = R.drawable.ir // Tu ícono de flecha
+                flechaIcono = R.drawable.ir,
+                ruta = "acerca_de_mi", // Ruta específica
+                navController = navController
             )
 
             OpcionMenuMejorada(
                 icono = R.drawable.ic_ubi,
                 texto = "Mi dirección",
-                flechaIcono = R.drawable.ir
+                flechaIcono = R.drawable.ir,
+                ruta = "mi_direccion", // Ruta específica
+                navController = navController
             )
 
             OpcionMenuMejorada(
                 icono = R.drawable.ic_agre_mas,
-                texto = "Agregar mascota",
-                flechaIcono = R.drawable.ir
+                texto = "Agregar Mascota",
+                flechaIcono = R.drawable.ir,
+                ruta = "registrar_mascota", // Ruta específica
+                navController = navController
             )
 
             OpcionMenuMejorada(
                 icono = R.drawable.ic_conf,
                 texto = "Configuración",
-                flechaIcono = R.drawable.ir
+                flechaIcono = R.drawable.ir,
+                ruta = "configuracion", // Ruta específica
+                navController = navController
             )
         }
     }
@@ -202,13 +211,15 @@ fun PantallaPerfilUsuario() {
 fun OpcionMenuMejorada(
     icono: Int,
     texto: String,
-    flechaIcono: Int
+    flechaIcono: Int,
+    ruta: String,
+    navController: NavController
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp)
-            .clickable { /* Acción del menú */ },
+            .clickable { navController.navigate(ruta) },
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
@@ -246,11 +257,11 @@ fun OpcionMenuMejorada(
         }
     }
 }
-
+/*
 @Preview(showBackground = true)
 @Composable
 fun PreviewPantallaPerfilUsuario() {
     MaterialTheme {
-        PantallaPerfilUsuario()
+        PantallaPerfilUsuario(navController = navController)
     }
-}
+}*/
