@@ -40,6 +40,38 @@ android {
 }
 
 dependencies {
+
+
+
+
+
+
+    //librerias de la Donia
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+
+    // Coil para Jetpack Compose, cargar imagenes
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
+    //compatibilidad con versiones anteriores de android
+    implementation("androidx.appcompat:appcompat:1.6.1")
+
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.5.0")
+    implementation("androidx.compose.ui:ui-text:1.5.0")
+    implementation("androidx.compose.material:material-icons-extended:1.6.7")
+    //esta libreria se repite
+    implementation("androidx.compose.material:material-icons-extended:1.5.4")
+
+    //mapa
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    //esta libreria tambien se repite
+    implementation("com.google.android.gms:play-services-maps:19.2.0")
+    implementation ("com.google.android.gms:play-services-location:21.2.0")
+    implementation ("com.google.maps.android:maps-compose:2.11.4")
+    implementation ("com.google.android.gms:play-services-maps:18.1.0")
+
+
+    //librerias predeterminadas de jetpack compose
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -48,26 +80,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("androidx.compose.material:material-icons-extended:1.6.7")
-    // implementation(libs.androidx.navigation.runtime.android)
-    implementation(libs.androidx.navigation.compose)
-    implementation("com.google.android.gms:play-services-maps:18.1.0")
-
-    implementation(libs.kotlinx.serialization.json)
-
-    implementation("androidx.compose.ui:ui-text-google-fonts:1.5.0")
-    implementation("androidx.compose.ui:ui-text:1.5.0")
-    implementation("com.google.android.gms:play-services-maps:19.2.0")
-    implementation ("com.google.android.gms:play-services-location:21.2.0")
-
-    implementation ("com.google.maps.android:maps-compose:2.11.4")
-    implementation ("com.google.android.gms:play-services-maps:18.1.0")
-
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.compose.material:material-icons-extended:1.5.4")
-    // Coil para Jetpack Compose
-    implementation("io.coil-kt:coil-compose:2.5.0")
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

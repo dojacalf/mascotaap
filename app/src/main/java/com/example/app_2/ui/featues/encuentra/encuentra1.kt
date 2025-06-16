@@ -1,4 +1,4 @@
-package com.example.app_2.screns
+package com.example.app_2.ui.featues.encuentra
 
 import com.example.app_2.R
 import androidx.compose.foundation.Image

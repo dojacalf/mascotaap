@@ -1,4 +1,4 @@
-package com.example.app_2.screns
+package com.example.app_2.ui.featues.notifications.view
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image

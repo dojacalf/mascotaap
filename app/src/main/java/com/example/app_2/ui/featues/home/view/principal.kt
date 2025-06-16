@@ -1,4 +1,4 @@
-package com.example.app_2.screns
+package com.example.app_2.ui.featues.home.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.app_2.R
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 
 // Colores personalizados
@@ -465,5 +466,5 @@ data class Mascota(
 @Preview
 @Composable
 fun PantallaPrincipalPreview() {
-    PantallaPrincipal(navController = androidx.navigation.compose.rememberNavController())
+    PantallaPrincipal(navController = rememberNavController())
 }

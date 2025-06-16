@@ -1,4 +1,4 @@
-package com.example.app_2.screns
+package com.example.app_2.ui.featues.Registrar_mascota.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

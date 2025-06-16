@@ -1,4 +1,4 @@
-package com.example.app_2.screns
+package com.example.app_2.ui.featues.chat.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -18,11 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.Navigator
 
 // Colores personalizados para el chat
 val LightGreen = Color(0xFFE2F7D2)

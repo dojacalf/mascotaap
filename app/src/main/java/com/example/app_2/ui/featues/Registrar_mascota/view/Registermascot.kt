@@ -1,5 +1,5 @@
 
-package com.example.app_2.screns
+package com.example.app_2.ui.featues.Registrar_mascota.view
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult

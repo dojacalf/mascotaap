@@ -1,4 +1,4 @@
-package com.example.app_2.screns
+package com.example.app_2.ui.featues.perfil_mascota.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

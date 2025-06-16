@@ -12,14 +12,14 @@ import com.example.app_2.Provarjetpack.InicioScreen
 import com.example.app_2.Provarjetpack.LoginScreen
 import com.example.app_2.Provarjetpack.Registro
 import com.example.app_2.Provarjetpack.carga
-import com.example.app_2.screns.AjustesScreen
-import com.example.app_2.screns.ChatSimpleScreen
-import com.example.app_2.screns.Frame4
-import com.example.app_2.screns.NotificationsScreen
-import com.example.app_2.screns.PantallaPerfilUsuario
-import com.example.app_2.screns.PantallaPrincipal
-import com.example.app_2.screns.PetScreen
-import com.example.app_2.screns.RegistroMascota
+import com.example.app_2.ui.featues.configuracion.view.AjustesScreen
+import com.example.app_2.ui.featues.chat.view.ChatSimpleScreen
+import com.example.app_2.ui.featues.perfil_mascota.view.Frame4
+import com.example.app_2.ui.featues.notifications.view.NotificationsScreen
+import com.example.app_2.ui.featues.perfil_usuario.view.PantallaPerfilUsuario
+import com.example.app_2.ui.featues.home.view.PantallaPrincipal
+import com.example.app_2.ui.featues.encuentra.PetScreen
+import com.example.app_2.ui.featues.Registrar_mascota.view.RegistroMascota
 import com.example.app_2.ui.featues.buscar.view.SearchScreen
 import perfilpets
 

@@ -42,6 +42,7 @@ data class Pet(
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
+@Preview
 @Composable
 fun perfilpets() {
     val pets = remember {

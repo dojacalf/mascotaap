@@ -1,4 +1,4 @@
-package com.example.app_2.screns
+package com.example.app_2.ui.featues.Maps.view
 
 import android.content.Context
 import android.graphics.Bitmap
