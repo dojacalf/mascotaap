@@ -1,4 +1,4 @@
-package com.example.app_2
+package com.example.app_2.ui.featues.auth.login.view
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

@@ -35,7 +35,6 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.app_2.R
@@ -409,6 +408,7 @@ fun Boton_llamar(
     }
 }
 
+
 @Composable
 fun Boton_mensaje(
     onClick: () -> Unit,
@@ -453,6 +453,7 @@ fun datos_del_dueño(
     }
 }
 
+
 @Composable
 fun nombre_de_mascota(
     modifier: Modifier = Modifier,
@@ -466,6 +467,7 @@ fun nombre_de_mascota(
         color = Color.Black
     )
 }
+
 
 @Composable
 fun boton_2_puntos(
@@ -572,3 +574,30 @@ fun Ubicacion(
         )
     }
 }
+
+/*
+parte
+   1 estructura
+titulo
+* identacion epaciondo justificado otrografia
+
+2 trabjo en equipo
+    equipo disuelto trabajar con personas git hub
+   git
+
+3 uso de la ia (herramienta)
+    gemini
+
+4 libro /canal de youtube /podcast
+
+aistencia 10%
+producto 50%
+trabajo encargado 40%
+
+
+
+
+
+
+*
+* */

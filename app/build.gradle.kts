@@ -53,10 +53,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation("com.google.android.gms:play-services-maps:18.1.0")
 
-
-
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.compose.googlefonts)
+
     implementation("androidx.compose.ui:ui-text-google-fonts:1.5.0")
     implementation("androidx.compose.ui:ui-text:1.5.0")
     implementation("com.google.android.gms:play-services-maps:19.2.0")

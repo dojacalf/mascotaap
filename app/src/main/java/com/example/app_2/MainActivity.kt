@@ -18,10 +18,9 @@ import com.example.app_2.screns.Frame4
 import com.example.app_2.screns.NotificationsScreen
 import com.example.app_2.screns.PantallaPerfilUsuario
 import com.example.app_2.screns.PantallaPrincipal
-import com.example.app_2.screns.PantallaRegistroMascota
 import com.example.app_2.screns.PetScreen
 import com.example.app_2.screns.RegistroMascota
-import com.example.app_2.screns.SearchScreen
+import com.example.app_2.ui.featues.buscar.view.SearchScreen
 import perfilpets
 
 
