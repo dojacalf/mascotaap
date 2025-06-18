@@ -56,3 +56,18 @@ fun App_2Theme(
         content = content
     )
 }
+
+
+
+
+
+@Composable
+fun AppTheme(content: @Composable () -> Unit) {
+    MaterialTheme(
+        colorScheme = MaterialTheme.colorScheme.copy(primary = Amarillo),
+        typography  = AppTypography,
+        shapes      = AppShapes,
+        content     = content
+    )
+}
+
