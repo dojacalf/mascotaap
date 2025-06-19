@@ -1,26 +1,57 @@
 package com.example.app_2.ui.features.encuentra
 
-import com.example.app_2.R
+import android.os.Bundle
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.material3.Text
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.Font
 import androidx.navigation.NavController
-
+import com.example.app_2.R
+import kotlinx.coroutines.delay
 
 @Composable
 fun PetScreen(navController: NavController) {
+    var startAnimation by remember { mutableStateOf(false) }
+
+    // Iniciar animación después de que la pantalla cargue
+    LaunchedEffect(Unit) {
+        delay(500)
+        startAnimation = true
+    }
+
+    // Animación de posición de la imagen
+    val offsetY by animateDpAsState(
+        targetValue = if (startAnimation) 0.dp else 100.dp,
+        animationSpec = tween(800)
+    )
+
+    // Animación de escala del botón (efecto pulso)
+    val buttonScale by animateFloatAsState(
+        targetValue = if (startAnimation) 1f else 0.95f,
+        animationSpec = infiniteRepeatable(
+            animation = keyframes {
+                durationMillis = 1200
+                0.95f at 0
+                1f at 400
+                0.97f at 800
+                1f at 1200
+            },
+            repeatMode = RepeatMode.Restart
+        )
+    )
+
     Box(modifier = Modifier.fillMaxSize()) {
 
         Image(
@@ -32,6 +63,7 @@ fun PetScreen(navController: NavController) {
                 .align(Alignment.TopStart),
             contentScale = ContentScale.Crop
         )
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -56,17 +88,15 @@ fun PetScreen(navController: NavController) {
                     modifier = Modifier.fillMaxSize()
                 )
 
-
                 Image(
                     painter = painterResource(id = R.drawable.f_cat),
                     contentDescription = "Mascota soñada",
                     modifier = Modifier
                         .size(350.dp)
                         .align(Alignment.BottomCenter)
-                        .offset(y = (-93.7).dp)
+                        .offset(y = offsetY)
                 )
             }
-
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -84,7 +114,7 @@ fun PetScreen(navController: NavController) {
             val Fredoka1 = FontFamily(Font(R.font.fredoka_regular))
             Column(
                 modifier = Modifier.padding(vertical = 16.dp),
-                horizontalAlignment = Alignment.Start
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = "Únete a nosotros y \n descubre la mejor \n mascota en tu ubicación",
@@ -96,19 +126,21 @@ fun PetScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(48.dp))
 
-                Button(
-                    onClick = {
-                        navController.navigate("principal")
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF64ADEF),
-                        contentColor = Color.White
-                    ),
-                    modifier = Modifier.width(200.dp)
-                ) {
-                    Text("Continuar", fontSize = 21.sp)
+                Box(modifier = Modifier.scale(buttonScale)) {
+                    Button(
+                        onClick = {
+                            navController.navigate("principal")
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFF64ADEF),
+                            contentColor = Color.White
+                        ),
+                        modifier = Modifier.width(200.dp)
+                    ) {
+                        Text("Continuar", fontSize = 21.sp)
+                    }
                 }
-
             }
         }
-    }}
+    }
+}

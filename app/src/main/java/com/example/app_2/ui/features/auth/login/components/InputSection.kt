@@ -78,7 +78,7 @@ fun InputSection(
             colors = ButtonDefaults.buttonColors(
                 containerColor = AmarilloPrincipal,
                 contentColor   = Color.White,
-                disabledContainerColor = Color.Red,
+                disabledContainerColor = Color.Cyan,
                 disabledContentColor  = Color.White,
             ),
             shape = RoundedCornerShape(28.dp),

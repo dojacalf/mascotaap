@@ -1,4 +1,4 @@
-package com.example.app_2.Provarjetpack
+package com.example.app_2.ui.features.auth.register.view
 
 
 import androidx.compose.foundation.Image
