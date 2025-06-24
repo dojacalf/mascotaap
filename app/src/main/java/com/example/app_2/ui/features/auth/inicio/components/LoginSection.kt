@@ -26,7 +26,7 @@ fun LoginSection(
             text = "Crea una cuenta",
             style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier
-                .clickable { navController.navigate("registro") }
+                .clickable { navController.navigate("register_screen") }
         )
 
         Text(

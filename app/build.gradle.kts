@@ -44,10 +44,11 @@ android {
 dependencies {
 
 
-
-
+    //firebase
     implementation(platform("com.google.firebase:firebase-bom:33.15.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth")
+
 
     //librerias de la Donia
     implementation(libs.androidx.navigation.compose)
@@ -67,11 +68,12 @@ dependencies {
 
     //mapa
     implementation("com.google.android.gms:play-services-maps:18.1.0")
+
     //esta libreria tambien se repite
     implementation("com.google.android.gms:play-services-maps:19.2.0")
-    implementation ("com.google.android.gms:play-services-location:21.2.0")
-    implementation ("com.google.maps.android:maps-compose:2.11.4")
-    implementation ("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.android.gms:play-services-location:21.2.0")
+    implementation("com.google.maps.android:maps-compose:2.11.4")
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
 
 
     //librerias predeterminadas de jetpack compose
@@ -83,6 +85,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

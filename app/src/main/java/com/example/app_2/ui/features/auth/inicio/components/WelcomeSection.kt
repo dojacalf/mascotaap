@@ -45,6 +45,6 @@ fun WelcomeSection(
 
         Spacer(Modifier.height(40.dp))
 
-        StartButton(onClick = { navController.navigate("encuentra1") })
+        StartButton(onClick = { navController.navigate("pet_screen") })
     }
 }

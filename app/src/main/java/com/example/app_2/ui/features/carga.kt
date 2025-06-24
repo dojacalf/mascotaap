@@ -20,7 +20,7 @@ import androidx.compose.runtime.LaunchedEffect
 import kotlinx.coroutines.delay
 
 @Composable
-fun carga(navController: NavController) {
+fun LoadingScreen(navController: NavController) {
 
     LaunchedEffect(Unit) {
         delay(3000) // Espera 3 segundos
