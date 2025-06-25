@@ -1,6 +1,7 @@
 package com.example.app_2.ui.features.auth.login.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,15 +27,15 @@ fun SocialSection(
 
         Text(
             "O conéctate con",
-            fontSize = 16.sp,
-            color = CaptionGrey,
-            modifier = Modifier.padding(bottom = 20.dp)
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        SocialButton(R.drawable.google,   "Iniciar Sesión Con Google",   onGoogle)
+        SocialButton(R.drawable.google,   "Google",   onGoogle)
         Spacer(Modifier.height(12.dp))
-        SocialButton(R.drawable.facebook, "Iniciar Sesión Con Facebook", onFacebook)
+        SocialButton(R.drawable.facebook, "Facebook", onFacebook)
         Spacer(Modifier.height(12.dp))
-        SocialButton(R.drawable.apple,    "Iniciar Sesión Con Apple",    onApple)
+        SocialButton(R.drawable.apple,    "Apple",    onApple)
     }
 }

@@ -19,18 +19,17 @@ import com.example.app_2.ui.features.auth.login.components.InputSection
 import com.example.app_2.ui.features.auth.login.components.LogoSection
 import com.example.app_2.ui.features.auth.login.components.SocialSection
 
+
 @Composable
 fun LoginScreen(navController: NavController) {
     var email    by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     Box(modifier = Modifier.fillMaxSize()) {
-
         BackgroundDecorations()
 
         Column(modifier = Modifier.fillMaxSize()) {
-
-            LogoSection(Modifier.weight(1.5f))
+            LogoSection(Modifier.weight(1f))
 
             InputSection(
                 email            = email,
@@ -46,16 +45,10 @@ fun LoginScreen(navController: NavController) {
                 onGoogle   = { /* TODO */ },
                 onFacebook = { /* TODO */ },
                 onApple    = { /* TODO */ },
-                modifier   = Modifier.weight(2f)
+                modifier   = Modifier.weight(1.5f)
             )
 
-            Footer(Modifier.weight(0.3f))
+            Footer(Modifier.weight(0.2f))
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun LoginPreview() {
-    LoginScreen(navController = rememberNavController())
 }

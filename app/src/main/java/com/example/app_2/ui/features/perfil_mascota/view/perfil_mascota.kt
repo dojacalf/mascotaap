@@ -575,29 +575,3 @@ fun Ubicacion(
     }
 }
 
-/*
-parte
-   1 estructura
-titulo
-* identacion epaciondo justificado otrografia
-
-2 trabjo en equipo
-    equipo disuelto trabajar con personas git hub
-   git
-
-3 uso de la ia (herramienta)
-    gemini
-
-4 libro /canal de youtube /podcast
-
-aistencia 10%
-producto 50%
-trabajo encargado 40%
-
-
-
-
-
-
-*
-* */

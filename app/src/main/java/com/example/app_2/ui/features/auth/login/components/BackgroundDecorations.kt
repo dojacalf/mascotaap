@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,13 +25,13 @@ fun BackgroundDecorations() {
         modifier = Modifier.fillMaxSize()
     )
 
-    // Círculos decorativos
+    // Círculos decorativos con color primario del tema
     Box(
         Modifier
             .offset(x = 250.dp, y = (-120).dp)
             .size(200.dp)
             .clip(CircleShape)
-            .background(AmarilloPrincipal)
+            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
     )
 
     Box(
@@ -38,6 +39,6 @@ fun BackgroundDecorations() {
             .offset(x = 350.dp, y = (-10).dp)
             .size(170.dp)
             .clip(CircleShape)
-            .background(AmarilloPrincipal)
+            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
     )
 }

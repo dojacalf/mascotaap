@@ -3,6 +3,7 @@ package com.example.app_2.ui.features.auth.login.components
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -17,22 +18,24 @@ fun BrandTextField(
     onValueChange: (String) -> Unit,
     label: String,
     leading: @Composable () -> Unit,
+    isPassword: Boolean = false
 ) {
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(label, color = Color.Gray) },
+        label = { Text(label, style = MaterialTheme.typography.bodyMedium) },
         leadingIcon = leading,
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp),
         shape = RoundedCornerShape(12.dp),
         colors = TextFieldDefaults.colors(
-            focusedContainerColor   = FondoBlanco,
-            unfocusedContainerColor = FondoBlanco,
-            disabledContainerColor  = FondoBlanco,
-            focusedIndicatorColor   = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-        )
+            focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+            unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+            disabledContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+            focusedIndicatorColor = MaterialTheme.colorScheme.primary,
+            unfocusedIndicatorColor = MaterialTheme.colorScheme.outlineVariant,
+        ),
+
     )
 }
