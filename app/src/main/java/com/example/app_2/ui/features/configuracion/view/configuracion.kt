@@ -13,7 +13,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -21,14 +20,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.app_2.R
 
-// Colores personalizados
-val BackgroundColor = Color(0xFFF8F8F8)
-val SwitchActiveColor = Color(0xFF007AFF)
-val DividerColor = Color(0xFFEEEEEE)
-val TextPrimaryColor = Color(0xFF000000)
-val TextSecondaryColor = Color(0xFF8A8A8E)
-
-//@Preview(showBackground = true)
 @Composable
 fun AjustesScreen(navController: NavController) {
     // Estados para los switches
@@ -41,7 +32,7 @@ fun AjustesScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackgroundColor)
+            .background(MaterialTheme.colorScheme.background)
             .padding(16.dp)
     ) {
         // Contenido de la pantalla de ajustes
@@ -49,7 +40,7 @@ fun AjustesScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(30.dp))
-                .background(Color.White)
+                .background(MaterialTheme.colorScheme.surface)
                 .padding(horizontal = 20.dp)
         ) {
             // Cabecera con título y flecha de retroceso
@@ -62,7 +53,7 @@ fun AjustesScreen(navController: NavController) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = "Volver",
-                    tint = Color.Black,
+                    tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
                         .size(24.dp)
                         .clickable {
@@ -77,7 +68,8 @@ fun AjustesScreen(navController: NavController) {
                     modifier = Modifier.padding(20.dp),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = TextPrimaryColor
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.headlineSmall
                 )
             }
 
@@ -86,379 +78,179 @@ fun AjustesScreen(navController: NavController) {
                 text = "Personalización",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
-                color = TextPrimaryColor,
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(vertical = 12.dp)
             )
 
             // Elemento Huso horario
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+            SettingsItem(
+                iconRes = R.drawable.p1,
+                title = "Uso horario",
+                subtitle = "Elige tu zona horaria",
+                hasSwitch = false
+            )
 
-                Box(
-                    modifier = Modifier
-                        .size(36.dp)
-                        .background(Color(0xFFE8E0FF)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.p1),
-                        contentDescription = "Añadir",
-                        modifier = Modifier
-                            .fillMaxSize()
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(16.dp))
-
-                Column(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(
-                        text = "Uso horario",
-                        fontSize = 16.sp,
-                        color = TextPrimaryColor
-                    )
-                    Text(
-                        text = "Elige tu zona horaria",
-                        fontSize = 12.sp,
-                        color = TextSecondaryColor
-                    )
-                }
-
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowRight,
-                    contentDescription = "Ir a detalle",
-                    tint = Color.Gray
-                )
-            }
-
-            Divider(color = DividerColor)
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
             // Elemento Idioma
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(36.dp)
-                        .background(Color(0xFFE8E0FF)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.p2),
-                        contentDescription = "Añadir",
-                        modifier = Modifier
-                            .fillMaxSize()
-                    )
-                }
+            SettingsItem(
+                iconRes = R.drawable.p2,
+                title = "Idioma",
+                subtitle = "Establece tu idioma",
+                hasSwitch = false
+            )
 
-                Spacer(modifier = Modifier.width(16.dp))
-
-                Column(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(
-                        text = "Idioma",
-                        fontSize = 16.sp,
-                        color = TextPrimaryColor
-                    )
-                    Text(
-                        text = "Establece tu idioma",
-                        fontSize = 12.sp,
-                        color = TextSecondaryColor
-                    )
-                }
-
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowRight,
-                    contentDescription = "Ir a detalle",
-                    tint = Color.Gray
-                )
-            }
-
-            Divider(color = DividerColor)
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
             // Elemento Modo oscuro
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(36.dp)
-                        .background(Color(0xFFE8E0FF)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.p3),
-                        contentDescription = "Añadir",
-                        modifier = Modifier
-                            .fillMaxSize()
-                    )
-                }
+            SettingsItem(
+                iconRes = R.drawable.p3,
+                title = "Modo oscuro",
+                subtitle = "Elige el modo de visualización",
+                hasSwitch = true,
+                switchState = modoOscuroActivado,
+                onSwitchChanged = { modoOscuroActivado = it }
+            )
 
-                Spacer(modifier = Modifier.width(16.dp))
-
-                Column(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(
-                        text = "Modo oscuro",
-                        fontSize = 16.sp,
-                        color = TextPrimaryColor
-                    )
-                    Text(
-                        text = "Elige el modo de visualización",
-                        fontSize = 12.sp,
-                        color = TextSecondaryColor
-                    )
-                }
-
-                Switch(
-                    checked = modoOscuroActivado,
-                    onCheckedChange = { modoOscuroActivado = it },
-                    colors = SwitchDefaults.colors(
-                        checkedThumbColor = Color.White,
-                        checkedTrackColor = SwitchActiveColor,
-                        uncheckedThumbColor = Color.White,
-                        uncheckedTrackColor = Color.LightGray
-                    )
-                )
-            }
-
-            Divider(color = DividerColor)
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
             // Sección de Acceso
             Text(
                 text = "Acceso",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
-                color = TextPrimaryColor,
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(top = 20.dp, bottom = 12.dp)
             )
 
             // Elemento Acceso a ubicación
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(36.dp)
-                        .background(Color(0xFFE8E0FF)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.p4),
-                        contentDescription = "Añadir",
-                        modifier = Modifier
-                            .fillMaxSize()
-                    )
-                }
+            SettingsItem(
+                iconRes = R.drawable.p4,
+                title = "Acceso a la ubicación",
+                subtitle = "Acceso a tu ubicación",
+                hasSwitch = true,
+                switchState = accesoUbicacionActivado,
+                onSwitchChanged = { accesoUbicacionActivado = it }
+            )
 
-                Spacer(modifier = Modifier.width(16.dp))
-
-                Column(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(
-                        text = "Acceso a la ubicación",
-                        fontSize = 16.sp,
-                        color = TextPrimaryColor
-                    )
-                    Text(
-                        text = "Acceso a tu ubicación",
-                        fontSize = 12.sp,
-                        color = TextSecondaryColor
-                    )
-                }
-
-                Switch(
-                    checked = accesoUbicacionActivado,
-                    onCheckedChange = { accesoUbicacionActivado = it },
-                    colors = SwitchDefaults.colors(
-                        checkedThumbColor = Color.White,
-                        checkedTrackColor = SwitchActiveColor,
-                        uncheckedThumbColor = Color.White,
-                        uncheckedTrackColor = Color.LightGray
-                    )
-                )
-            }
-
-            Divider(color = DividerColor)
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
             // Elemento Acceso a fotos
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(36.dp)
-                        .background(Color(0xFFE8E0FF)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.p5),
-                        contentDescription = "Añadir",
-                        modifier = Modifier
-                            .fillMaxSize()
-                    )
-                }
+            SettingsItem(
+                iconRes = R.drawable.p5,
+                title = "Acceso a la foto",
+                subtitle = "Acceso a tus medios",
+                hasSwitch = true,
+                switchState = accesoFotoActivado,
+                onSwitchChanged = { accesoFotoActivado = it }
+            )
 
-                Spacer(modifier = Modifier.width(16.dp))
-
-                Column(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(
-                        text = "Acceso a la foto",
-                        fontSize = 16.sp,
-                        color = TextPrimaryColor
-                    )
-                    Text(
-                        text = "Acceso a tus medios",
-                        fontSize = 12.sp,
-                        color = TextSecondaryColor
-                    )
-                }
-
-                Switch(
-                    checked = accesoFotoActivado,
-                    onCheckedChange = { accesoFotoActivado = it },
-                    colors = SwitchDefaults.colors(
-                        checkedThumbColor = Color.White,
-                        checkedTrackColor = SwitchActiveColor,
-                        uncheckedThumbColor = Color.White,
-                        uncheckedTrackColor = Color.LightGray
-                    )
-                )
-            }
-
-            Divider(color = DividerColor)
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
             // Sección de Notificaciones
             Text(
                 text = "Notificaciones",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
-                color = TextPrimaryColor,
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(top = 20.dp, bottom = 12.dp)
             )
 
             // Elemento Notificaciones
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(36.dp)
-                        .background(Color(0xFFE8E0FF)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.p6),
-                        contentDescription = "Añadir",
-                        modifier = Modifier
-                            .fillMaxSize()
-                    )
-                }
-                Spacer(modifier = Modifier.width(16.dp))
+            SettingsItem(
+                iconRes = R.drawable.p6,
+                title = "Notificaciones",
+                subtitle = "Recibe notificaciones automáticas",
+                hasSwitch = true,
+                switchState = notificacionesActivadas,
+                onSwitchChanged = { notificacionesActivadas = it }
+            )
 
-                Column(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(
-                        text = "Notificaciones",
-                        fontSize = 16.sp,
-                        color = TextPrimaryColor
-                    )
-                    Text(
-                        text = "Recibe notificaciones automáticas",
-                        fontSize = 12.sp,
-                        color = TextSecondaryColor
-                    )
-                }
-
-                Switch(
-                    checked = notificacionesActivadas,
-                    onCheckedChange = { notificacionesActivadas = it },
-                    colors = SwitchDefaults.colors(
-                        checkedThumbColor = Color.White,
-                        checkedTrackColor = SwitchActiveColor,
-                        uncheckedThumbColor = Color.White,
-                        uncheckedTrackColor = Color.LightGray
-                    )
-                )
-            }
-
-            Divider(color = DividerColor)
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
             // Elemento Notificaciones por correo
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(36.dp)
-                        .background(Color(0xFFE8E0FF)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.p7),
-                        contentDescription = "Añadir",
-                        modifier = Modifier
-                            .fillMaxSize()
-                    )
-                }
+            SettingsItem(
+                iconRes = R.drawable.p7,
+                title = "Notificaciones por correo electrónico",
+                subtitle = "Recibe actualizaciones periódicas",
+                hasSwitch = true,
+                switchState = notificacionesCorreoActivadas,
+                onSwitchChanged = { notificacionesCorreoActivadas = it }
+            )
+        }
+    }
+}
 
-                Spacer(modifier = Modifier.width(16.dp))
+@Composable
+private fun SettingsItem(
+    iconRes: Int,
+    title: String,
+    subtitle: String,
+    hasSwitch: Boolean,
+    switchState: Boolean = false,
+    onSwitchChanged: (Boolean) -> Unit = {}
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(
+            modifier = Modifier
+                .size(36.dp)
+                .background(
+                    MaterialTheme.colorScheme.primaryContainer,
+                    RoundedCornerShape(8.dp)
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(id = iconRes),
+                contentDescription = title,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
 
-                Column(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(
-                        text = "Notificaciones por correo electrónico",
-                        fontSize = 16.sp,
-                        color = TextPrimaryColor
-                    )
-                    Text(
-                        text = "Recibe actualizaciones periódicas",
-                        fontSize = 12.sp,
-                        color = TextSecondaryColor
-                    )
-                }
+        Spacer(modifier = Modifier.width(16.dp))
 
-                Switch(
-                    checked = notificacionesCorreoActivadas,
-                    onCheckedChange = { notificacionesCorreoActivadas = it },
-                    colors = SwitchDefaults.colors(
-                        checkedThumbColor = Color.White,
-                        checkedTrackColor = SwitchActiveColor,
-                        uncheckedThumbColor = Color.White,
-                        uncheckedTrackColor = Color.LightGray
-                    )
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(
+                text = title,
+                fontSize = 16.sp,
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Text(
+                text = subtitle,
+                fontSize = 12.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
+
+        if (hasSwitch) {
+            Switch(
+                checked = switchState,
+                onCheckedChange = onSwitchChanged,
+                colors = SwitchDefaults.colors(
+                    checkedThumbColor = MaterialTheme.colorScheme.onPrimary,
+                    checkedTrackColor = MaterialTheme.colorScheme.primary,
+                    uncheckedThumbColor = MaterialTheme.colorScheme.outline,
+                    uncheckedTrackColor = MaterialTheme.colorScheme.surfaceVariant
                 )
-            }
+            )
+        } else {
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowRight,
+                contentDescription = "Ir a detalle",
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 }
