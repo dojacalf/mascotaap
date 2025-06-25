@@ -24,15 +24,19 @@ fun AuthTextField(
     onValueChange: (String) -> Unit,
     hint: String,
     leadingIconRes: Int,
-    hintColor: Color,
-    unfocusedBorderColor: Color,
-    fontFamily: FontFamily,
     modifier: Modifier = Modifier
 ) {
+    val colors = MaterialTheme.colorScheme
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        placeholder = { Text(hint, color = hintColor, fontSize = 14.sp) },
+        placeholder = {
+            Text(
+                hint,
+                style = MaterialTheme.typography.bodySmall,
+                color = colors.onSurfaceVariant
+            )
+        },
         leadingIcon = {
             Image(
                 painter = painterResource(leadingIconRes),
@@ -43,12 +47,12 @@ fun AuthTextField(
         singleLine = true,
         shape = RoundedCornerShape(8.dp),
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedBorderColor = unfocusedBorderColor,
-            focusedBorderColor = unfocusedBorderColor,
-            unfocusedContainerColor = Color.White
+            unfocusedBorderColor = colors.outline,
+            focusedBorderColor = colors.primary,
+            unfocusedContainerColor = colors.surface,
+            focusedContainerColor = colors.surface
         ),
         textStyle = MaterialTheme.typography.bodySmall.copy(
-            fontFamily = fontFamily,
             fontSize = 14.sp
         ),
         modifier = modifier
