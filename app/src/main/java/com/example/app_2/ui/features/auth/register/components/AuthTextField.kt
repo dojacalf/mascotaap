@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -26,7 +27,6 @@ fun AuthTextField(
     leadingIconRes: Int,
     modifier: Modifier = Modifier
 ) {
-    val colors = MaterialTheme.colorScheme
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
@@ -34,30 +34,29 @@ fun AuthTextField(
             Text(
                 hint,
                 style = MaterialTheme.typography.bodySmall,
-                color = colors.onSurfaceVariant
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         },
         leadingIcon = {
-            Image(
+            Icon(
                 painter = painterResource(leadingIconRes),
                 contentDescription = null,
-                modifier = Modifier.size(20.dp)
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
         },
         singleLine = true,
         shape = RoundedCornerShape(8.dp),
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedBorderColor = colors.outline,
-            focusedBorderColor = colors.primary,
-            unfocusedContainerColor = colors.surface,
-            focusedContainerColor = colors.surface
+            unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+            focusedBorderColor = MaterialTheme.colorScheme.primary,
+            unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+            focusedContainerColor = MaterialTheme.colorScheme.surface
         ),
         textStyle = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 14.sp
+            color = MaterialTheme.colorScheme.onSurface
         ),
         modifier = modifier
             .fillMaxWidth()
             .height(56.dp)
-            .padding(vertical = 6.dp)
     )
 }

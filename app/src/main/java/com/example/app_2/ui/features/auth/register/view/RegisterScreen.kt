@@ -29,59 +29,174 @@ import com.example.app_2.ui.features.auth.register.components.SocialButton
 import com.example.app_2.ui.features.auth.register.components.SocialLoginSeparator
 import com.example.app_2.R
 
-// Paleta y fuente definidas localmente en el archivo de la pantalla.
-private object Palette {
-    val Yellow      = Color(0xFFFFD600)
-    val LightGray   = Color(0xFFF5F5F5)
-    val TextGray    = Color(0xFF9E9E9E)
-    val Accent      = Color(0xFF9C7F41)
-    val FacebookBlu = Color(0xFF3b5998)
-}
 
-private val fredoka = FontFamily(
-    Font(R.font.fredoka_regular) // Asegúrate de que este recurso exista en res/font
-)
 
 @Composable
-fun AuthTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    hint: String,
-    leadingIconRes: Int,
-    modifier: Modifier = Modifier
-) {
-    val colors = MaterialTheme.colorScheme
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        placeholder = {
-            Text(
-                hint,
-                style = MaterialTheme.typography.bodySmall,
-                color = colors.onSurfaceVariant
-            )
-        },
-        leadingIcon = {
+fun Registro(navController: NavController) {
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
+    Box(
+        Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+        /* ---------- Decorative coloured shapes ---------- */
+        Box(
+            Modifier
+                .offset(x = 250.dp, y = (-120).dp)
+                .size(200.dp)
+                .clip(CircleShape)
+                .background(MaterialTheme.colorScheme.primaryContainer)
+        )
+        Box(
+            Modifier
+                .offset(x = 350.dp, y = (-10).dp)
+                .size(170.dp)
+                .clip(CircleShape)
+                .background(MaterialTheme.colorScheme.primaryContainer)
+        )
+        Box(
+            Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .height(50.dp)
+                .background(MaterialTheme.colorScheme.primaryContainer)
+        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(Modifier.height(40.dp))
+
             Image(
-                painter = painterResource(leadingIconRes),
+                painter = painterResource(R.drawable.register2),
                 contentDescription = null,
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(200.dp),
+                contentScale = ContentScale.Fit
             )
-        },
-        singleLine = true,
-        shape = RoundedCornerShape(8.dp),
-        colors = OutlinedTextFieldDefaults.colors(
-            unfocusedBorderColor = colors.outline,
-            focusedBorderColor = colors.primary,
-            unfocusedContainerColor = colors.surface,
-            focusedContainerColor = colors.surface
-        ),
-        textStyle = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 14.sp
-        ),
-        modifier = modifier
-            .fillMaxWidth()
-            .height(56.dp)
-            .padding(vertical = 6.dp)
-    )
+
+            Text(
+                "Registrarse",
+                style = MaterialTheme.typography.headlineSmall,
+                modifier = Modifier.padding(top = 24.dp, bottom = 4.dp)
+            )
+            Text(
+                "Al registrarte, estás aceptando nuestros",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Text(
+                "Términos y política de privacidad",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Medium,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    "Iniciar sesión",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(end = 16.dp)
+                )
+                Text(
+                    "Registrarse",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.drawWithContent {
+                        drawContent()
+                        /*
+                        drawLine(
+                            MaterialTheme.colorScheme.primary,
+                            start = Offset(0f, size.height),
+                            end   = Offset(size.width, size.height),
+                            strokeWidth = 2f
+                        )*/
+                    }
+                )
+            }
+
+            AuthTextField(
+                value = email,
+                onValueChange = { email = it },
+                hint = "Correo electrónico",
+                leadingIconRes = R.drawable.mail,
+                modifier = Modifier.padding(vertical = 6.dp)
+            )
+            AuthTextField(
+                value = password,
+                onValueChange = { password = it },
+                hint = "Contraseña",
+                leadingIconRes = R.drawable.lock,
+                modifier = Modifier.padding(vertical = 6.dp)
+            )
+
+            OptionRow(
+                iconRes = R.drawable.a,
+                text = "Recordar contraseña",
+                modifier = Modifier.padding(vertical = 4.dp)
+            )
+            OptionRow(
+                iconRes = R.drawable.b,
+                text = "Olvidaste tu contraseña",
+                modifier = Modifier.padding(vertical = 4.dp)
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            Button(
+                onClick   = { navController.navigate("principal") },
+                shape     = RoundedCornerShape(8.dp),
+                colors    = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    contentColor   = MaterialTheme.colorScheme.onPrimaryContainer
+                ),
+                elevation = ButtonDefaults.buttonElevation(0.dp),
+                modifier  = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+            ) {
+                Text("Register", style = MaterialTheme.typography.labelLarge)
+            }
+
+            Spacer(Modifier.height(24.dp))
+
+            SocialLoginSeparator()
+
+            Spacer(Modifier.height(20.dp))
+
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                SocialButton(R.drawable.facebook)
+                Spacer(Modifier.width(24.dp))
+                SocialButton(R.drawable.google, hasBorder = true)
+                Spacer(Modifier.width(24.dp))
+                SocialButton(R.drawable.apple)
+            }
+
+            Spacer(Modifier.weight(1f))
+
+            Text(
+                "© Todos los derechos reservados Incubaker • 2025",
+                style = MaterialTheme.typography.bodySmall,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
+            )
+        }
+    }
 }

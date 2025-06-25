@@ -2,6 +2,8 @@ package com.example.app_2.ui.features.auth.register.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,8 +18,6 @@ import androidx.compose.ui.unit.sp
 fun OptionRow(
     iconRes: Int,
     text: String,
-    textColor: Color,
-    fontFamily: FontFamily,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -27,12 +27,16 @@ fun OptionRow(
             .fillMaxWidth()
             .padding(vertical = 4.dp)
     ) {
-        Image(
+        Icon(
             painter = painterResource(iconRes),
             contentDescription = null,
-            modifier = Modifier.size(20.dp)
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Spacer(Modifier.width(4.dp))
-        Text(text, fontSize = 16.sp, color = textColor, fontFamily = fontFamily)
+        Text(
+            text,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
     }
 }
