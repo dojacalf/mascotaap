@@ -10,7 +10,8 @@ import com.example.app_2.ui.features.auth.login.view.LoginScreen
 import com.example.app_2.ui.features.auth.register.view.Registro
 import com.example.app_2.ui.features.buscar.view.SearchScreen
 import com.example.app_2.ui.features.configuracion.view.AjustesScreen
-import com.example.app_2.ui.features.encuentra.PetScreen
+import com.example.app_2.ui.features.encuentra.FindScreen
+import com.example.app_2.ui.features.perfil_mascota.view.PetPerfilScreen
 
 @Composable
 fun AppNavigation() {
@@ -18,7 +19,7 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = AppScreens.RegisterScreen.route
+        startDestination =  AppScreens.RegisterScreen.route
     ) {
         composable(route = AppScreens.LoginScreen.route) {
             LoginScreen(navController = navController)
@@ -29,14 +30,18 @@ fun AppNavigation() {
         composable(route = AppScreens.RegisterScreen.route) {
             Registro(navController = navController)
         }
-        composable(route = AppScreens.PetScreen.route) {
-            PetScreen(navController = navController)
-        }
+
         composable(route = AppScreens.SearchScreen.route) {
             SearchScreen(navController = navController)
         }
         composable(route = AppScreens.ConfiguracionScreen.route){
             AjustesScreen(navController = navController)
+        }
+        composable(route = AppScreens.PetPerfilScreen.route){
+            PetPerfilScreen(navController = navController)
+        }
+        composable(route = AppScreens.FindScreen1.route){
+            FindScreen(navController = navController)
         }
     }
 }

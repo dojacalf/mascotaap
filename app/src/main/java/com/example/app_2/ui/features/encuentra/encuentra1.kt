@@ -22,7 +22,7 @@ import com.example.app_2.R
 import kotlinx.coroutines.delay
 
 @Composable
-fun PetScreen(navController: NavController) {
+fun FindScreen(navController: NavController) {
     var startAnimation by remember { mutableStateOf(false) }
 
     // Iniciar animación después de que la pantalla cargue
