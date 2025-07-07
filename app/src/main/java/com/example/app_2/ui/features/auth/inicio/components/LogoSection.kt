@@ -27,10 +27,10 @@ fun LogoSection(modifier: Modifier = Modifier) {
         contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painterResource(id = R.drawable.perro2),
+            painter = painterResource(id = R.drawable.perrologo),
             contentDescription = "Logo de la aplicación",
             modifier = Modifier
-                .fillMaxWidth(0.6f)
+                .fillMaxWidth(1f)
                 .aspectRatio(1f),
             contentScale = ContentScale.Crop
         )

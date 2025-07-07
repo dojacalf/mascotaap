@@ -28,13 +28,13 @@ fun InicioScreen(navController: NavController) {
             .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(0.dp))
 
         LogoSection(Modifier.weight(2f))
 
-        WelcomeSection(navController, Modifier.weight(2f))
+        WelcomeSection(navController, Modifier.weight(1f))
 
-        LoginSection(navController, Modifier.weight(1f))
+        LoginSection(navController, Modifier.weight(0.8f))
 
         Spacer(Modifier.height(32.dp))
     }
