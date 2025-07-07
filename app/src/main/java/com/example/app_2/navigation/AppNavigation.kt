@@ -11,6 +11,7 @@ import com.example.app_2.ui.features.auth.register.view.Registro
 import com.example.app_2.ui.features.buscar.view.SearchScreen
 import com.example.app_2.ui.features.configuracion.view.AjustesScreen
 import com.example.app_2.ui.features.encuentra.FindScreen
+import com.example.app_2.ui.features.home.view.PantallaPrincipal
 import com.example.app_2.ui.features.perfil_mascota.view.PetPerfilScreen
 
 @Composable
@@ -19,7 +20,7 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination =  AppScreens.RegisterScreen.route
+        startDestination = AppScreens.InicioScreen.route
     ) {
         composable(route = AppScreens.LoginScreen.route) {
             LoginScreen(navController = navController)
@@ -30,7 +31,6 @@ fun AppNavigation() {
         composable(route = AppScreens.RegisterScreen.route) {
             Registro(navController = navController)
         }
-
         composable(route = AppScreens.SearchScreen.route) {
             SearchScreen(navController = navController)
         }
@@ -43,5 +43,9 @@ fun AppNavigation() {
         composable(route = AppScreens.FindScreen1.route){
             FindScreen(navController = navController)
         }
+        composable(route = AppScreens.PantallaPrincipal.route){
+            PantallaPrincipal(navController = navController)
+        }
+
     }
 }

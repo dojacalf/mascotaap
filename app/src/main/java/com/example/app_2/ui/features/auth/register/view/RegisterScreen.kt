@@ -40,6 +40,7 @@ fun Registro(navController: NavController) {
         Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
+            .navigationBarsPadding() 
     ) {
         /* ---------- Decorative coloured shapes ---------- */
         Box(
@@ -133,6 +134,7 @@ fun Registro(navController: NavController) {
                 leadingIconRes = R.drawable.mail,
                 modifier = Modifier.padding(vertical = 6.dp)
             )
+
             AuthTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -166,7 +168,7 @@ fun Registro(navController: NavController) {
                     .fillMaxWidth()
                     .height(48.dp)
             ) {
-                Text("Register", style = MaterialTheme.typography.labelLarge)
+                Text("Registrarse", style = MaterialTheme.typography.labelLarge)
             }
 
             Spacer(Modifier.height(24.dp))

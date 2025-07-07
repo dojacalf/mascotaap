@@ -22,6 +22,7 @@ fun InicioScreen(navController: NavController) {
 
     Column(
         modifier = Modifier
+
             .fillMaxSize()
             .verticalScroll(scrollState)
             .padding(horizontal = 16.dp),

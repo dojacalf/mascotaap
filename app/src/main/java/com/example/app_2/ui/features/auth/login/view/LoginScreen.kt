@@ -4,6 +4,7 @@ package com.example.app_2.ui.features.auth.login.view
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,7 +26,11 @@ fun LoginScreen(navController: NavController) {
     var email    by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier =
+        Modifier
+            .fillMaxSize()
+            .navigationBarsPadding()
+    ) {
         BackgroundDecorations()
 
         Column(modifier = Modifier.fillMaxSize()) {
