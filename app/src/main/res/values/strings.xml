@@ -1,3 +1,25 @@
 <resources>
-    <string name="app_name">app_2</string>
+    <string name="app_name">MascotaApp</string>
+        <!-- Registro -->
+        <string name="register_title">Registrarse</string>
+        <string name="register_terms">Al registrarte, estás aceptando nuestros</string>
+        <string name="register_privacy">Términos y política de privacidad</string>
+
+        <!-- Opciones de sesión -->
+        <string name="login_option">Iniciar sesión</string>
+        <string name="register_option">Registrarse</string>
+
+        <!-- Campos -->
+        <string name="hint_email">Correo electrónico</string>
+        <string name="hint_password">Contraseña</string>
+
+        <!-- Recordar / olvidar -->
+        <string name="option_remember">Recordar contraseña</string>
+        <string name="option_forgot">Olvidaste tu contraseña</string>
+
+        <!-- Botón principal -->
+        <string name="button_register">Registrarse</string>
+
+        <!-- Pie de página -->
+        <string name="footer_copyright">© Todos los derechos reservados Incubaker • 2025</string>
 </resources>

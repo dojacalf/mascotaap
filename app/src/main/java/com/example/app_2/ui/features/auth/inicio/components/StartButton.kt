@@ -44,7 +44,7 @@ fun StartButton(
     ) {
         Text(
             text = "EMPEZAR",
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleLarge
         )
     }
 }
