@@ -10,7 +10,9 @@ import com.example.app_2.ui.theme.AppTheme
 
 
 import com.example.app_2.prueva_fire.ui.navigation.AppNavigation
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
