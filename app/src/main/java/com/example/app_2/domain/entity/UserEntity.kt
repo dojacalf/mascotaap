@@ -12,3 +12,4 @@ sealed class UserMode(val userType: Int) {
     data object COORDINADOR_USER : UserMode(userType = 2)
     data object ADMIN_USER : UserMode(userType = 3)
 }
+
