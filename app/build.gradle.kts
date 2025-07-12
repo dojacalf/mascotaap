@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.app_2"
+    namespace = "com.example.mascotaap"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.app_2"
+        applicationId = "com.example.mascotaap"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

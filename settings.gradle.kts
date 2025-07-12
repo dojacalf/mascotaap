@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "app_2"
+rootProject.name = "mascotaap"
 include(":app")
  
