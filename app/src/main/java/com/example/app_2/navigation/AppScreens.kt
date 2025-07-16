@@ -11,4 +11,7 @@ sealed class AppScreens(val route: String) {
     object PetPerfilScreen: AppScreens("perfil_mascota_screen")
     object FindScreen1: AppScreens("encuentra_screen")
     object PantallaPrincipal: AppScreens("pantalla_principal")
+    object principal: AppScreens("principal")
+    object perfilUsuario: AppScreens("perfil")
+    object RegistroMascota: AppScreens("registrar_mascota")
 }

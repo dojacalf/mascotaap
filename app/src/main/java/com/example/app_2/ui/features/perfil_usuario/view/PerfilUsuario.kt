@@ -256,11 +256,3 @@ fun OpcionMenuMejorada(
         }
     }
 }
-/*
-@Preview(showBackground = true)
-@Composable
-fun PreviewPantallaPerfilUsuario() {
-    MaterialTheme {
-        PantallaPerfilUsuario(navController = navController)
-    }
-}*/

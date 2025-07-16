@@ -6,6 +6,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.app_2.Provarjetpack.InicioScreen
 import com.example.app_2.navigation.AppScreens.ConfiguracionScreen
+import com.example.app_2.navigation.AppScreens.RegistroMascota
+import com.example.app_2.navigation.AppScreens.principal
+import com.example.app_2.ui.features.Registrar_mascota.view.PantallaRegistroMascota
+import com.example.app_2.ui.features.Registrar_mascota.view.RegistroMascota
 import com.example.app_2.ui.features.auth.login.view.LoginScreen
 import com.example.app_2.ui.features.auth.register.view.Registro
 import com.example.app_2.ui.features.buscar.view.SearchScreen
@@ -13,6 +17,7 @@ import com.example.app_2.ui.features.configuracion.view.AjustesScreen
 import com.example.app_2.ui.features.encuentra.FindScreen
 import com.example.app_2.ui.features.home.view.PantallaPrincipal
 import com.example.app_2.ui.features.perfil_mascota.view.PetPerfilScreen
+import com.example.app_2.ui.features.perfil_usuario.view.PantallaPerfilUsuario
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
@@ -28,8 +33,8 @@ fun AppNavigation() {
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(route = AppScreens.LoginScreen.route) {
-            LoginScreen(navController = navController)
+        composable(route = AppScreens.principal.route) {
+            PantallaPrincipal(navController = navController)
         }
         composable(route = AppScreens.InicioScreen.route) {
             InicioScreen(navController = navController)
@@ -51,6 +56,15 @@ fun AppNavigation() {
         }
         composable(route = AppScreens.PantallaPrincipal.route){
             PantallaPrincipal(navController = navController)
+        }
+        composable(route = AppScreens.perfilUsuario.route) {
+            PantallaPerfilUsuario(navController = navController)
+        }
+        composable(route = AppScreens.LoginScreen.route) {
+            LoginScreen(navController = navController)
+        }
+        composable(route = AppScreens.RegistroMascota.route) {
+            RegistroMascota(onSubmit = {})
         }
 
     }

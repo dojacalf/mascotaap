@@ -134,15 +134,15 @@ fun ActionIcons(navController: NavController) {
         )
         ProfileImage(
             navController = navController,
-            destinationRoute = "perfil usuario"
+            destinationRoute = "perfil"
         )
     }
 }
 
 @Composable
 fun ProfileImage(
-    navController: NavController, // Parámetro para controlar la navegación
-    destinationRoute: String,      // Parámetro para la ruta a la que quieres navegar
+    navController: NavController,
+    destinationRoute: String,
 ) {
     Box(
         modifier = Modifier
