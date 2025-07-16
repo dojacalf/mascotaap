@@ -13,14 +13,20 @@ import com.example.app_2.ui.features.configuracion.view.AjustesScreen
 import com.example.app_2.ui.features.encuentra.FindScreen
 import com.example.app_2.ui.features.home.view.PantallaPrincipal
 import com.example.app_2.ui.features.perfil_mascota.view.PetPerfilScreen
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
+    val startDestination = if (FirebaseAuth.getInstance().currentUser != null) {
+        AppScreens.PantallaPrincipal.route
+    } else {
+        AppScreens.InicioScreen.route
+    }
 
     NavHost(
         navController = navController,
-        startDestination = AppScreens.InicioScreen.route
+        startDestination = startDestination
     ) {
         composable(route = AppScreens.LoginScreen.route) {
             LoginScreen(navController = navController)

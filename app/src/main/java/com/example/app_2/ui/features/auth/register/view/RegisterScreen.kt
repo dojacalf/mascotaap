@@ -1,6 +1,7 @@
 package com.example.app_2.ui.features.auth.register.view
 
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,6 +16,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -23,19 +25,41 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.app_2.ui.features.auth.register.components.AuthTextField
 import com.example.app_2.ui.features.auth.register.components.OptionRow
 import com.example.app_2.ui.features.auth.register.components.SocialButton
 import com.example.app_2.ui.features.auth.register.components.SocialLoginSeparator
 import com.example.app_2.R
-
+import com.example.app_2.navigation.AppScreens
+import com.example.app_2.ui.features.auth.register.viewmodel.AuthState
+import com.example.app_2.ui.features.auth.register.viewmodel.RegisterViewModel
 
 
 @Composable
-fun Registro(navController: NavController) {
+fun Registro(
+    navController: NavController,
+    viewModel: RegisterViewModel = hiltViewModel()
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val authState by viewModel.authState.collectAsState()
+    val context = LocalContext.current
+
+    LaunchedEffect(authState) {
+        when (authState) {
+            is AuthState.Success -> {
+                navController.navigate(AppScreens.PantallaPrincipal.route) {
+                    popUpTo(AppScreens.InicioScreen.route) { inclusive = true }
+                }
+            }
+            is AuthState.Error -> {
+                Toast.makeText(context, (authState as AuthState.Error).message, Toast.LENGTH_SHORT).show()
+            }
+            else -> Unit
+        }
+    }
 
     Box(
         Modifier
@@ -132,7 +156,8 @@ fun Registro(navController: NavController) {
             Spacer(Modifier.height(16.dp))
 
             Button(
-                onClick = { navController.navigate("principal") },
+                onClick = { viewModel.createAccount(email, password) },
+                enabled = authState != AuthState.Loading,
                 shape = RoundedCornerShape(8.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -143,8 +168,12 @@ fun Registro(navController: NavController) {
                     .fillMaxWidth()
                     .height(48.dp)
             ) {
-                Text(stringResource(R.string.button_register),
-                    style = MaterialTheme.typography.labelLarge)
+                if (authState == AuthState.Loading) {
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp))
+                } else {
+                    Text(stringResource(R.string.button_register),
+                        style = MaterialTheme.typography.labelLarge)
+                }
             }
 
             Spacer(Modifier.height(24.dp))

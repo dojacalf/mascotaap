@@ -1,8 +1,8 @@
 package com.example.app_2.data.reposity
 
-import com.example.app_2.domain.entity.UserEntity
-import com.example.app_2.domain.repository.AuthRepository
-
+//import com.example.app_2.domain.entity.UserEntity
+//import com.example.app_2.domain.repository.AuthRepository
+/*
 class AuthRepositoryImpl(): AuthRepository {
     override fun dologin(user: String, password: String): UserEntity {
         val userResponse: UserResponse = UserResponse(
@@ -13,4 +13,4 @@ class AuthRepositoryImpl(): AuthRepository {
         )
         return userResponse.toDomain()
     }
-}
+}*/

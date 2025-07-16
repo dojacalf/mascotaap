@@ -1,5 +1,5 @@
 package com.example.app_2.data.responce
-
+/*
 data class UserResponse(
     val userId: String,
     val userName: String,
@@ -22,4 +22,4 @@ fun UserResponse.toDomain(): UserEntity {
         userEmail = userEmail,
         userType = userMode
     )
-}
+}*/
