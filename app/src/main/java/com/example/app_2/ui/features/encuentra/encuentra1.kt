@@ -26,19 +26,16 @@ import kotlinx.coroutines.delay
 fun FindScreen(navController: NavController) {
     var startAnimation by remember { mutableStateOf(false) }
 
-    // Iniciar animación después de que la pantalla cargue
     LaunchedEffect(Unit) {
         delay(500)
         startAnimation = true
     }
 
-    // Animación de posición de la imagen
     val offsetY by animateDpAsState(
-        targetValue = if (startAnimation) 0.dp else 100.dp,
+        targetValue = if (startAnimation) -79.dp else 300.dp,
         animationSpec = tween(800)
     )
 
-    // Animación de escala del botón (efecto pulso)
     val buttonScale by animateFloatAsState(
         targetValue = if (startAnimation) 1f else 0.95f,
         animationSpec = infiniteRepeatable(
