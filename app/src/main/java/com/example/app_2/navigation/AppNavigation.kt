@@ -1,40 +1,60 @@
 package com.example.app_2.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.app_2.Provarjetpack.InicioScreen
-import com.example.app_2.navigation.AppScreens.ConfiguracionScreen
-import com.example.app_2.navigation.AppScreens.RegistroMascota
-import com.example.app_2.navigation.AppScreens.principal
-import com.example.app_2.ui.features.Registrar_mascota.view.PantallaRegistroMascota
-import com.example.app_2.ui.features.Registrar_mascota.view.RegistroMascota
+import com.example.app_2.ui.features.auth.inicio.view.InicioScreen
+import com.example.app_2.ui.features.carga.view.CargaScreen
+import com.example.app_2.ui.features.Maps.view.MapaScreen
+import com.example.app_2.ui.features.Registrar_mascota.view.RegistrarMascotaScreen
 import com.example.app_2.ui.features.auth.login.view.LoginScreen
 import com.example.app_2.ui.features.auth.register.view.Registro
-import com.example.app_2.ui.features.buscar.view.SearchScreen
-import com.example.app_2.ui.features.configuracion.view.AjustesScreen
-import com.example.app_2.ui.features.encuentra.FindScreen
-import com.example.app_2.ui.features.home.view.PantallaPrincipal
+import com.example.app_2.ui.features.buscar.view.BuscarScreen
+import com.example.app_2.ui.features.chat.view.ChatScreen
+import com.example.app_2.ui.features.configuracion.view.ConfiguracionScreen
+import com.example.app_2.ui.features.encuentra.view.FindScreen
+import com.example.app_2.ui.features.encuentra.view.FindScreen2
+import com.example.app_2.ui.features.encuentra.view.FindScreen3
+import com.example.app_2.ui.features.home.view.PrincipalScreen
+import com.example.app_2.ui.features.notifications.view.NotificationsScreen
 import com.example.app_2.ui.features.perfil_mascota.view.PetPerfilScreen
 import com.example.app_2.ui.features.perfil_usuario.view.PantallaPerfilUsuario
+import com.example.app_2.ui.features.perfiles_mascota.view.PerfilesMascotaScreen
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    val startDestination = if (FirebaseAuth.getInstance().currentUser != null) {
-        AppScreens.PantallaPrincipal.route
-    } else {
-        AppScreens.InicioScreen.route
+    var startDestination by remember { mutableStateOf<String?>(null) }
+
+    // Determina el destino inicial de forma asíncrona
+    LaunchedEffect(Unit) {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        startDestination = if (currentUser != null) {
+            AppScreens.PrincipalScreen.route
+        } else {
+            AppScreens.InicioScreen.route
+        }
+    }
+
+    // Muestra un composable de carga mientras se determina el destino
+    if (startDestination == null) {
+        CargaScreen(navController = navController) // O un composable de carga genérico
+        return
     }
 
     NavHost(
         navController = navController,
-        startDestination = startDestination
+        startDestination = startDestination!!
     ) {
-        composable(route = AppScreens.principal.route) {
-            PantallaPrincipal(navController = navController)
+        composable(route = AppScreens.PrincipalScreen.route) {
+            PrincipalScreen(navController = navController)
         }
         composable(route = AppScreens.InicioScreen.route) {
             InicioScreen(navController = navController)
@@ -42,30 +62,47 @@ fun AppNavigation() {
         composable(route = AppScreens.RegisterScreen.route) {
             Registro(navController = navController)
         }
-        composable(route = AppScreens.SearchScreen.route) {
-            SearchScreen(navController = navController)
+        composable(route = AppScreens.BuscarScreen.route) {
+            BuscarScreen(navController = navController)
         }
         composable(route = AppScreens.ConfiguracionScreen.route){
-            AjustesScreen(navController = navController)
+            ConfiguracionScreen(navController = navController)
         }
-        composable(route = AppScreens.PetPerfilScreen.route){
+        composable(route = AppScreens.PerfilMascotaScreen.route){
             PetPerfilScreen(navController = navController)
         }
-        composable(route = AppScreens.FindScreen1.route){
+        composable(route = AppScreens.Encuentra1Screen.route){
             FindScreen(navController = navController)
         }
-        composable(route = AppScreens.PantallaPrincipal.route){
-            PantallaPrincipal(navController = navController)
-        }
-        composable(route = AppScreens.perfilUsuario.route) {
+        composable(route = AppScreens.PerfilUsuarioScreen.route) {
             PantallaPerfilUsuario(navController = navController)
         }
         composable(route = AppScreens.LoginScreen.route) {
             LoginScreen(navController = navController)
         }
-        composable(route = AppScreens.RegistroMascota.route) {
-            RegistroMascota(onSubmit = {})
+        composable(route = AppScreens.RegistrarMascotaScreen.route) {
+            RegistrarMascotaScreen(onSubmit = {})
         }
-
+        composable(route = AppScreens.CargaScreen.route) {
+            CargaScreen(navController = navController)
+        }
+        composable(route = AppScreens.MapaScreen.route) {
+            MapaScreen(onBackClick = { navController.popBackStack() })
+        }
+        composable(route = AppScreens.ChatScreen.route) {
+            ChatScreen(navController = navController)
+        }
+        composable(route = AppScreens.Encuentra2Screen.route) {
+            FindScreen2(navController = navController)
+        }
+        composable(route = AppScreens.Encuentra3Screen.route) {
+            FindScreen3(navController = navController)
+        }
+        composable(route = AppScreens.NotificationsScreen.route) {
+            NotificationsScreen()
+        }
+        composable(route = AppScreens.PerfilesMascotaScreen.route) {
+            PerfilesMascotaScreen()
+        }
     }
 }

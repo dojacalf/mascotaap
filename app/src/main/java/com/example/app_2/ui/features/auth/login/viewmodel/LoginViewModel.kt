@@ -37,16 +37,12 @@ class LoginViewModel @Inject constructor(
 
     fun onLoginClicked() {
         viewModelScope.launch {
-            // Set loading state
             _state.value = LoginState(isLoading = true)
             try {
-                // Execute the use case
                 val loggedInUser = loginUseCase(email, password)
-                // Set success state
-                _state.value = LoginState(user = loggedInUser, loginSuccess = true)
+                _state.value = LoginState(user = loggedInUser, loginSuccess = true, isLoading = false)
             } catch (e: Exception) {
-                // Set error state
-                _state.value = LoginState(error = e.message ?: "Error desconocido")
+                _state.value = LoginState(error = e.message ?: "Error desconocido", isLoading = false)
             }
         }
     }

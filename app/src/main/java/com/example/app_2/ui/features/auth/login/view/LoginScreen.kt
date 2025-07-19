@@ -19,6 +19,9 @@ import com.example.app_2.ui.features.auth.login.components.InputSection
 import com.example.app_2.ui.features.auth.login.components.LogoSection
 import com.example.app_2.ui.features.auth.login.components.SocialSection
 import com.example.app_2.ui.features.auth.login.viewmodel.LoginViewModel
+import com.example.app_2.ui.theme.AppTheme
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun LoginScreen(
@@ -30,7 +33,7 @@ fun LoginScreen(
 
     LaunchedEffect(key1 = state) {
         if (state.loginSuccess) {
-            navController.navigate(AppScreens.PantallaPrincipal.route) {
+            navController.navigate(AppScreens.PrincipalScreen.route) {
                 popUpTo(AppScreens.InicioScreen.route) { inclusive = true }
             }
             viewModel.onLoginSuccessHandled()
@@ -41,38 +44,46 @@ fun LoginScreen(
         }
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .navigationBarsPadding()
-    ) {
-        BackgroundDecorations()
+    AppTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .navigationBarsPadding()
+        ) {
+            BackgroundDecorations()
 
-        Column(modifier = Modifier.fillMaxSize()) {
-            LogoSection(Modifier.weight(1f))
+            Column(modifier = Modifier.fillMaxSize()) {
+                LogoSection(Modifier.weight(1f))
 
-            InputSection(
-                email = viewModel.email,
-                onEmailChange = { viewModel.email = it },
-                password = viewModel.password,
-                onPasswordChange = { viewModel.password = it },
-                onForgotPassword = { /* TODO: flujo recuperación */ },
-                onLogin = { viewModel.onLoginClicked() },
-                modifier = Modifier.weight(2f)
-            )
+                InputSection(
+                    email = viewModel.email,
+                    onEmailChange = { viewModel.email = it },
+                    password = viewModel.password,
+                    onPasswordChange = { viewModel.password = it },
+                    onForgotPassword = { /* TODO: flujo recuperación */ },
+                    onLogin = { viewModel.onLoginClicked() },
+                    modifier = Modifier.weight(2f)
+                )
 
-            SocialSection(
-                onGoogle = { /* TODO */ },
-                onFacebook = { /* TODO */ },
-                onApple = { /* TODO */ },
-                modifier = Modifier.weight(1.5f)
-            )
+                SocialSection(
+                    onGoogle = { /* TODO */ },
+                    onFacebook = { /* TODO */ },
+                    onApple = { /* TODO */ },
+                    modifier = Modifier.weight(1.5f)
+                )
 
-            Footer(Modifier.weight(0.2f))
-        }
+                Footer(Modifier.weight(0.2f))
+            }
 
-        if (state.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            if (state.isLoading) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoginScreenPreview() {
+    LoginScreen(navController = rememberNavController())
 }
