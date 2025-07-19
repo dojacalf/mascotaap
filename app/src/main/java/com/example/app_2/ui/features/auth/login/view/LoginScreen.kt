@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -17,29 +19,25 @@ import com.example.app_2.ui.features.auth.login.components.InputSection
 import com.example.app_2.ui.features.auth.login.components.LogoSection
 import com.example.app_2.ui.features.auth.login.components.SocialSection
 import com.example.app_2.ui.features.auth.login.viewmodel.LoginViewModel
-import com.example.app_2.ui.features.auth.register.viewmodel.AuthState
 
 @Composable
 fun LoginScreen(
     navController: NavController,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    val authState by viewModel.authState.collectAsState()
+    val state by viewModel.state.collectAsState()
     val context = LocalContext.current
 
-    LaunchedEffect(authState) {
-        when (authState) {
-            is AuthState.Success -> {
-                navController.navigate(AppScreens.PantallaPrincipal.route) {
-                    popUpTo(AppScreens.InicioScreen.route) { inclusive = true }
-                }
+    LaunchedEffect(key1 = state) {
+        if (state.loginSuccess) {
+            navController.navigate(AppScreens.PantallaPrincipal.route) {
+                popUpTo(AppScreens.InicioScreen.route) { inclusive = true }
             }
-            is AuthState.Error -> {
-                Toast.makeText(context, (authState as AuthState.Error).message, Toast.LENGTH_SHORT).show()
-            }
-            else -> Unit
+            viewModel.onLoginSuccessHandled()
+        }
+        state.error?.let {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            viewModel.onLoginSuccessHandled() // Also clear error state
         }
     }
 
@@ -54,12 +52,12 @@ fun LoginScreen(
             LogoSection(Modifier.weight(1f))
 
             InputSection(
-                email = email,
-                onEmailChange = { email = it },
-                password = password,
-                onPasswordChange = { password = it },
+                email = viewModel.email,
+                onEmailChange = { viewModel.email = it },
+                password = viewModel.password,
+                onPasswordChange = { viewModel.password = it },
                 onForgotPassword = { /* TODO: flujo recuperación */ },
-                onLogin = { viewModel.signIn(email, password) },
+                onLogin = { viewModel.onLoginClicked() },
                 modifier = Modifier.weight(2f)
             )
 
@@ -71,6 +69,10 @@ fun LoginScreen(
             )
 
             Footer(Modifier.weight(0.2f))
+        }
+
+        if (state.isLoading) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
     }
 }
