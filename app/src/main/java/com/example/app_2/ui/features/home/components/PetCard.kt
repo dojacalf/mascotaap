@@ -25,13 +25,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.app_2.domain.model.Pet
+import com.example.app_2.navigation.AppScreens
 
 @Composable
 fun PetCard(pet: Pet, navController: NavController) {
     Card(
         modifier = Modifier
             .clickable {
-                // navController.navigate("perfil_mascota_screen/${pet.id}")
+                navController.navigate("${AppScreens.PerfilMascotaScreen.route}/${pet.id}")
             }
             .width(170.dp)
             .height(220.dp), // Adjusted height
@@ -69,4 +70,5 @@ fun PetCard(pet: Pet, navController: NavController) {
         }
     }
 }
+
 

@@ -6,9 +6,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.app_2.ui.features.auth.inicio.view.InicioScreen
 import com.example.app_2.ui.features.carga.view.CargaScreen
 import com.example.app_2.ui.features.Maps.view.MapaScreen
@@ -68,7 +70,10 @@ fun AppNavigation() {
         composable(route = AppScreens.ConfiguracionScreen.route){
             ConfiguracionScreen(navController = navController)
         }
-        composable(route = AppScreens.PerfilMascotaScreen.route){
+        composable(
+            route = AppScreens.PerfilMascotaScreen.route + "/{petId}",
+            arguments = listOf(navArgument("petId") { type = NavType.StringType })
+        ) {
             PetPerfilScreen(navController = navController)
         }
         composable(route = AppScreens.Encuentra1Screen.route){

@@ -15,10 +15,11 @@ import com.example.app_2.R
 
 @Composable
 fun nombre_de_mascota(
+    name: String,
     modifier: Modifier = Modifier,
 ) {
     Text(
-        "Kitty",
+        text = name,
         modifier = modifier,
         style = MaterialTheme.typography.headlineMedium,
         color = MaterialTheme.colorScheme.onSurface
@@ -27,6 +28,7 @@ fun nombre_de_mascota(
 
 @Composable
 fun Ubicacion(
+    location: String,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -42,7 +44,7 @@ fun Ubicacion(
                 .padding(end = 4.dp)
         )
         Text(
-            "Bellavista, Puno (5km)",
+            text = location,
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.primary
         )
@@ -51,10 +53,11 @@ fun Ubicacion(
 
 @Composable
 fun Parte_5_descripcion(
+    description: String,
     modifier: Modifier = Modifier,
 ) {
     Text(
-        "Korayma es una gata que encontró su lugar en mi mundo...",
+        text = description,
         modifier = modifier,
         style = MaterialTheme.typography.bodyMedium,
         color = MaterialTheme.colorScheme.onSurfaceVariant

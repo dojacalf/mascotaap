@@ -41,6 +41,17 @@ class PetRepositoryImpl @Inject constructor(
         }
         awaitClose { listener.remove() }
     }
+
+    override suspend fun getPetById(petId: String): Result<Pet?> {
+        return try {
+            val document = firestore.collection("pets").document(petId).get().await()
+            val pet = document.toObject(Pet::class.java)
+            Result.success(pet)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }
+
 
 

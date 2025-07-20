@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.example.app_2.R
 
 @Composable
-fun TarjetaGenero() {
+fun TarjetaGenero(gender: String) {
     Box(
         modifier = Modifier
             .size(width = 90.dp, height = 70.dp)
@@ -45,7 +45,7 @@ fun TarjetaGenero() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                "Hembra",
+                text = gender,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
@@ -59,7 +59,7 @@ fun TarjetaGenero() {
 }
 
 @Composable
-fun TarjetaEdad() {
+fun TarjetaEdad(age: String) {
     Box(
         modifier = Modifier
             .size(width = 90.dp, height = 70.dp)
@@ -84,7 +84,7 @@ fun TarjetaEdad() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                "1 Año",
+                text = age,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSecondaryContainer
             )
@@ -98,7 +98,7 @@ fun TarjetaEdad() {
 }
 
 @Composable
-fun TarjetaPeso() {
+fun TarjetaPeso(weight: String) {
     Box(
         modifier = Modifier
             .size(width = 90.dp, height = 70.dp)
@@ -123,7 +123,7 @@ fun TarjetaPeso() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                "10 Kg",
+                text = weight,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onTertiaryContainer
             )

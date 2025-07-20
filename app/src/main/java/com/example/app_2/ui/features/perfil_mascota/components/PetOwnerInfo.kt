@@ -8,16 +8,18 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun datos_del_dueño(
+    ownerName: String,
+    petName: String,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
         Text(
-            "Daniel Valencia",
+            text = ownerName,
             style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.onSurface
         )
         Text(
-            "Dueño de Korayma",
+            text = "Dueño de $petName",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )

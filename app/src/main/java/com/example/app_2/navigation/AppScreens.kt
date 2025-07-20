@@ -8,7 +8,7 @@ sealed class AppScreens(val route: String) {
     object BuscarScreen: AppScreens("buscar_screen")
     object CargaScreen: AppScreens("carga_screen")
     object ConfiguracionScreen: AppScreens("configuracion_screen")
-    object PerfilMascotaScreen: AppScreens("perfil_mascota_screen")
+    object PerfilMascotaScreen: AppScreens("perfil_mascota_screen") // Note: The argument is defined in AppNavigation
     object Encuentra1Screen: AppScreens("encuentra_screen")
     object PrincipalScreen: AppScreens("principal_screen")
     object PerfilUsuarioScreen: AppScreens("perfil_usuario_screen")
