@@ -1,6 +1,5 @@
 package com.example.app_2.ui.features.Registrar_mascota.viewmodel
 
-import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -32,7 +31,6 @@ class RegistrarMascotaViewModel @Inject constructor(
     var tipo by mutableStateOf("Perro")
     var sexo by mutableStateOf("Macho")
     var descripcion by mutableStateOf("")
-    var imagenUri by mutableStateOf<Uri?>(null)
 
     var state by mutableStateOf(RegistrarMascotaState())
         private set
@@ -44,12 +42,6 @@ class RegistrarMascotaViewModel @Inject constructor(
             val currentFirebaseUser = authRepository.getCurrentUser()
             if (currentFirebaseUser == null) {
                 state = state.copy(isLoading = false, error = "Usuario no autenticado.")
-                return@launch
-            }
-
-            val localImageUri = imagenUri
-            if (localImageUri == null) {
-                state = state.copy(isLoading = false, error = "Por favor, selecciona una imagen.")
                 return@launch
             }
 
@@ -70,7 +62,7 @@ class RegistrarMascotaViewModel @Inject constructor(
                 ownerName = userProfile.name
             )
 
-            val result = petRepository.registerPet(pet, localImageUri)
+            val result = petRepository.registerPet(pet)
 
             result.onSuccess {
                 state = state.copy(isLoading = false, isSuccess = true)

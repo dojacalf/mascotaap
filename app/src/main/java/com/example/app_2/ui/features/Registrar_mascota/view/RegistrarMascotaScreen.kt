@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.app_2.ui.features.Registrar_mascota.components.ImageSelection
 import com.example.app_2.ui.features.Registrar_mascota.components.PetForm
 import com.example.app_2.ui.features.Registrar_mascota.components.SubmitButton
 import com.example.app_2.ui.features.Registrar_mascota.viewmodel.RegistrarMascotaViewModel
@@ -83,10 +82,6 @@ fun RegistrarMascotaScreen(
                     verticalArrangement = Arrangement.spacedBy(24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    ImageSelection(
-                        imagenUri = viewModel.imagenUri,
-                        onImageUriChanged = { viewModel.imagenUri = it }
-                    )
                     PetForm(
                         nombre = viewModel.nombre,
                         onNombreChanged = { viewModel.nombre = it },

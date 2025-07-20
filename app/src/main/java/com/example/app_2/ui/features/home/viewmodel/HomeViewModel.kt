@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.app_2.domain.model.Pet
 import com.example.app_2.domain.repository.PetRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,13 +33,13 @@ class HomeViewModel @Inject constructor(
     private fun loadPets() {
         viewModelScope.launch {
             state = state.copy(isLoading = true)
-            petRepository.getAllPets()
-                .onSuccess { pets ->
-                    state = state.copy(isLoading = false, pets = pets)
-                }
-                .onFailure {
+            petRepository.getAllPets().collect { result ->
+                result.onSuccess { pets ->
+                    state = state.copy(isLoading = false, pets = pets, error = null)
+                }.onFailure {
                     state = state.copy(isLoading = false, error = it.message)
                 }
+            }
         }
     }
 }
