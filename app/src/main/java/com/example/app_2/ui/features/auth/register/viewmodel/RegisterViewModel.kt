@@ -2,7 +2,7 @@ package com.example.app_2.ui.features.auth.register.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseAuth
+import com.example.app_2.domain.usecase.Register
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val auth: FirebaseAuth
+    private val registerUseCase: Register
 ) : ViewModel() {
 
     private val _authState = MutableStateFlow<AuthState>(AuthState.Initial)
@@ -21,14 +21,8 @@ class RegisterViewModel @Inject constructor(
         viewModelScope.launch {
             _authState.value = AuthState.Loading
             try {
-                auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            _authState.value = AuthState.Success
-                        } else {
-                            _authState.value = AuthState.Error(task.exception?.message ?: "Error en el registro")
-                        }
-                    }
+                registerUseCase(email, password)
+                _authState.value = AuthState.Success
             } catch (e: Exception) {
                 _authState.value = AuthState.Error(e.message ?: "Error en el registro")
             }

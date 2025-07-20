@@ -81,7 +81,7 @@ fun AppNavigation() {
             LoginScreen(navController = navController)
         }
         composable(route = AppScreens.RegistrarMascotaScreen.route) {
-            RegistrarMascotaScreen(onSubmit = {})
+            RegistrarMascotaScreen(navController = navController)
         }
         composable(route = AppScreens.CargaScreen.route) {
             CargaScreen(navController = navController)

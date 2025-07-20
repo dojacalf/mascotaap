@@ -10,15 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PetCardHeader(distancia: String) {
+fun PetCardHeader(ownerName: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(12.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.End, // Alineamos todo a la derecha
         verticalAlignment = Alignment.CenterVertically
     ) {
-        LocationBadge(distancia = distancia)
         FavoriteButton()
     }
 }

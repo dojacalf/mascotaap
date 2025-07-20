@@ -4,8 +4,8 @@ import com.example.app_2.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
 
-class Login @Inject constructor(private val repository: AuthRepository) {
+class Register @Inject constructor(private val repository: AuthRepository) {
     suspend operator fun invoke(email: String, pass: String): FirebaseUser {
-        return repository.login(email, pass)
+        return repository.register(email, pass)
     }
 }

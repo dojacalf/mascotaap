@@ -8,19 +8,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 
 @Composable
 fun PetImage(
-    imageResId: Int,
-    nombre: String,
+    imageUrl: String,
+    petName: String,
     modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier) {
         Image(
-            painter = painterResource(id = imageResId),
-            contentDescription = nombre,
+            painter = rememberAsyncImagePainter(model = imageUrl),
+            contentDescription = petName,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxSize()

@@ -1,5 +1,6 @@
 package com.example.app_2.ui.features.perfil_usuario.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,8 +10,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +26,7 @@ import androidx.compose.ui.unit.sp
 import com.example.app_2.R
 
 @Composable
-fun ContactInfo() {
+fun ContactInfo(email: String, phone: String, onEditPhoneClicked: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,10 +49,9 @@ fun ContactInfo() {
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text(
-                    text = "aguilaralexiña@gmail.com",
+                    text = email,
                     fontSize = 14.sp,
-
-                    )
+                )
             }
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -56,20 +59,30 @@ fun ContactInfo() {
             // Teléfono
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.llamarsvg),
-                    contentDescription = "Teléfono",
-                    modifier = Modifier.size(20.dp),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Spacer(modifier = Modifier.width(12.dp))
-                Text(
-                    text = "922191501",
-                    fontSize = 14.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.llamarsvg),
+                        contentDescription = "Teléfono",
+                        modifier = Modifier.size(20.dp),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = phone.ifEmpty { "No especificado" },
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                IconButton(onClick = onEditPhoneClicked) {
+                    Icon(
+                        imageVector = Icons.Default.Edit,
+                        contentDescription = "Editar teléfono",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
         }
     }

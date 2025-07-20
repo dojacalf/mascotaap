@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.app_2.domain.model.User
 import com.example.app_2.domain.usecase.Login
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +15,6 @@ import javax.inject.Inject
 // State class to represent the UI state of the Login screen
 data class LoginState(
     val isLoading: Boolean = false,
-    val user: User? = null,
     val error: String? = null,
     val loginSuccess: Boolean = false
 )
@@ -39,8 +37,10 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = LoginState(isLoading = true)
             try {
-                val loggedInUser = loginUseCase(email, password)
-                _state.value = LoginState(user = loggedInUser, loginSuccess = true, isLoading = false)
+                // The use case now returns a FirebaseUser, but we don't need to store it here.
+                // We just need to know that the login was successful.
+                loginUseCase(email, password)
+                _state.value = LoginState(loginSuccess = true, isLoading = false)
             } catch (e: Exception) {
                 _state.value = LoginState(error = e.message ?: "Error desconocido", isLoading = false)
             }

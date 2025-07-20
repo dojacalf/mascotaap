@@ -9,6 +9,8 @@ plugins {
 
 }
 
+
+
 android {
     namespace = "com.example.app_2"
     compileSdk = 35
@@ -42,12 +44,16 @@ android {
     buildFeatures {
         compose = true
     }
+    kotlin {
+        jvmToolchain(11)
+    }
 }
 
 dependencies {
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation)
+    implementation("com.google.firebase:firebase-firestore")
     ksp(libs.hilt.compiler)
 
     //firebase
@@ -55,6 +61,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
 
 
     implementation(libs.androidx.navigation.compose)
@@ -69,17 +76,11 @@ dependencies {
     implementation("androidx.compose.ui:ui-text-google-fonts:1.5.0")
     implementation("androidx.compose.ui:ui-text:1.5.0")
     implementation("androidx.compose.material:material-icons-extended:1.6.7")
-    //esta libreria se repite
-    implementation("androidx.compose.material:material-icons-extended:1.5.4")
 
     //mapa
-    implementation("com.google.android.gms:play-services-maps:18.1.0")
-
-    //esta libreria tambien se repite
     implementation("com.google.android.gms:play-services-maps:19.2.0")
     implementation("com.google.android.gms:play-services-location:21.2.0")
     implementation("com.google.maps.android:maps-compose:2.11.4")
-    implementation("com.google.android.gms:play-services-maps:18.1.0")
 
 
     //librerias predeterminadas de jetpack compose

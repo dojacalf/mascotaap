@@ -23,17 +23,20 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.app_2.R
+// import coil.compose.rememberAsyncImagePainter
 
 @Composable
-fun ProfileHeader() {
+fun ProfileHeader(profilePictureUrl: String, backgroundImageUrl: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(280.dp)
     ) {
         // Imagen de fondo
+        // TODO: Usar una librería como Coil para cargar imágenes desde una URL
+        // val backgroundImage = rememberAsyncImagePainter(backgroundImageUrl.ifEmpty { R.drawable.dcori })
         Image(
-            painter = painterResource(id = R.drawable.dcori),
+            painter = painterResource(id = R.drawable.dcori), // Placeholder
             contentDescription = "Imagen de fondo",
             modifier = Modifier
                 .fillMaxWidth()
@@ -62,8 +65,9 @@ fun ProfileHeader() {
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 20.dp)
         ) {
+            // val profileImage = rememberAsyncImagePainter(profilePictureUrl.ifEmpty { R.drawable.dcori })
             Image(
-                painter = painterResource(id = R.drawable.dcori), // Cambia esto por tu imagen de perfil
+                painter = painterResource(id = R.drawable.dcori), // Placeholder
                 contentDescription = "Foto de perfil",
                 modifier = Modifier
                     .size(120.dp)
