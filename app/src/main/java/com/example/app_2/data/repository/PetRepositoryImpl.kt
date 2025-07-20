@@ -1,24 +1,32 @@
 package com.example.app_2.data.repository
 
+import android.net.Uri
 import com.example.app_2.domain.model.Pet
 import com.example.app_2.domain.repository.PetRepository
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
+import java.util.UUID
 import javax.inject.Inject
 
 class PetRepositoryImpl @Inject constructor(
-    private val firestore: FirebaseFirestore
+    private val firestore: FirebaseFirestore,
+    private val storage: FirebaseStorage
 ) : PetRepository {
 
     override suspend fun registerPet(pet: Pet): Result<Unit> {
         return try {
             val petDocument = firestore.collection("pets").document()
-            val petWithId = pet.copy(id = petDocument.id)
-            petDocument.set(petWithId).await()
+            // Add a server-side timestamp
+            val petWithIdAndTimestamp = pet.copy(id = petDocument.id)
+            val petMap = petWithIdAndTimestamp.toMap().plus("timestamp" to FieldValue.serverTimestamp())
+
+            petDocument.set(petMap).await()
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
@@ -50,6 +58,32 @@ class PetRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+    override suspend fun uploadPetImage(imageUri: Uri): Result<String> {
+        return try {
+            val storageRef = storage.reference.child("pet_images/${UUID.randomUUID()}")
+            val uploadTask = storageRef.putFile(imageUri).await()
+            val downloadUrl = uploadTask.storage.downloadUrl.await().toString()
+            Result.success(downloadUrl)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // Helper function to convert Pet to Map
+    private fun Pet.toMap(): Map<String, Any> {
+        return mapOf(
+            "id" to id,
+            "name" to name,
+            "age" to age,
+            "type" to type,
+            "sex" to sex,
+            "description" to description,
+            "ownerId" to ownerId,
+            "ownerName" to ownerName,
+            "imageUrl" to imageUrl
+        )
     }
 }
 

@@ -47,22 +47,32 @@ fun PetCard(pet: Pet, navController: NavController) {
         ) {
             PetCardHeader(ownerName = pet.ownerName)
 
-            // Placeholder for the image
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .padding(horizontal = 12.dp)
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Pets,
-                    contentDescription = pet.name,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.height(60.dp)
+            val imageModifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(horizontal = 12.dp)
+                .clip(RoundedCornerShape(12.dp))
+
+            if (pet.imageUrl.isNotEmpty()) {
+                PetImage(
+                    imageUrl = pet.imageUrl,
+                    petName = pet.name,
+                    modifier = imageModifier
                 )
+            } else {
+                // Placeholder for the image
+                Box(
+                    modifier = imageModifier
+                        .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Pets,
+                        contentDescription = pet.name,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.height(60.dp)
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.height(8.dp))

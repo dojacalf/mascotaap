@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
 import com.example.app_2.R
 import com.example.app_2.ui.features.perfil_mascota.components.*
 import com.example.app_2.ui.features.perfil_mascota.viewmodel.PerfilMascotaViewModel
@@ -54,19 +55,28 @@ fun PetPerfilScreen(
                             .fillMaxWidth()
                             .weight(1f)
                     ) {
-                        // Placeholder as there is no image URL
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .background(MaterialTheme.colorScheme.surfaceVariant),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Pets,
+                        if (pet.imageUrl.isNotBlank()) {
+                            Image(
+                                painter = rememberAsyncImagePainter(model = pet.imageUrl),
                                 contentDescription = pet.name,
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.size(100.dp)
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.fillMaxSize()
                             )
+                        } else {
+                            // Placeholder if there is no image URL
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(MaterialTheme.colorScheme.surfaceVariant),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Pets,
+                                    contentDescription = pet.name,
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    modifier = Modifier.size(100.dp)
+                                )
+                            }
                         }
 
                         boton_retroceder(

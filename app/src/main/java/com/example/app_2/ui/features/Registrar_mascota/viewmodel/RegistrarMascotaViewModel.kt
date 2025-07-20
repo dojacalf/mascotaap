@@ -1,8 +1,9 @@
 package com.example.app_2.ui.features.Registrar_mascota.viewmodel
 
+import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.app_2.domain.model.Pet
@@ -31,6 +32,7 @@ class RegistrarMascotaViewModel @Inject constructor(
     var tipo by mutableStateOf("Perro")
     var sexo by mutableStateOf("Macho")
     var descripcion by mutableStateOf("")
+    var imageUri by mutableStateOf<Uri?>(null)
 
     var state by mutableStateOf(RegistrarMascotaState())
         private set
@@ -39,35 +41,48 @@ class RegistrarMascotaViewModel @Inject constructor(
         viewModelScope.launch {
             state = state.copy(isLoading = true, error = null)
 
+            if (imageUri == null) {
+                state = state.copy(isLoading = false, error = "Por favor, selecciona una imagen para la mascota.")
+                return@launch
+            }
+
             val currentFirebaseUser = authRepository.getCurrentUser()
             if (currentFirebaseUser == null) {
                 state = state.copy(isLoading = false, error = "Usuario no autenticado.")
                 return@launch
             }
 
-            // Get user profile to fetch owner's name
             val userProfile = userRepository.getUserProfile(currentFirebaseUser.uid)
             if (userProfile == null) {
                 state = state.copy(isLoading = false, error = "No se pudo obtener el perfil del usuario.")
                 return@launch
             }
 
-            val pet = Pet(
-                name = nombre,
-                age = edad,
-                type = tipo,
-                sex = sexo,
-                description = descripcion,
-                ownerId = currentFirebaseUser.uid,
-                ownerName = userProfile.name
-            )
+            // 1. Upload image
+            val uploadResult = petRepository.uploadPetImage(imageUri!!)
+            uploadResult.onSuccess { imageUrl ->
+                // 2. Create Pet object with the new image URL
+                val pet = Pet(
+                    name = nombre,
+                    age = edad,
+                    type = tipo,
+                    sex = sexo,
+                    description = descripcion,
+                    ownerId = currentFirebaseUser.uid,
+                    ownerName = userProfile.name,
+                    imageUrl = imageUrl
+                )
 
-            val result = petRepository.registerPet(pet)
+                // 3. Register pet in Firestore
+                val registerResult = petRepository.registerPet(pet)
+                registerResult.onSuccess {
+                    state = state.copy(isLoading = false, isSuccess = true)
+                }.onFailure {
+                    state = state.copy(isLoading = false, error = it.message ?: "Error al registrar la mascota.")
+                }
 
-            result.onSuccess {
-                state = state.copy(isLoading = false, isSuccess = true)
             }.onFailure {
-                state = state.copy(isLoading = false, error = it.message ?: "Error desconocido")
+                state = state.copy(isLoading = false, error = it.message ?: "Error al subir la imagen.")
             }
         }
     }

@@ -12,6 +12,5 @@ data class Pet(
     val description: String = "",
     val ownerId: String = "",
     val ownerName: String = "",
-    @ServerTimestamp
-    val timestamp: Date? = null
+    val imageUrl: String = ""
 )
