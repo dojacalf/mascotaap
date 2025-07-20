@@ -1,5 +1,7 @@
 package com.example.app_2.ui.features.perfil_usuario.view
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,6 +45,22 @@ fun PantallaPerfilUsuario(
     viewModel: PerfilUsuarioViewModel = hiltViewModel()
 ) {
     val state by viewModel.state
+
+    val profileImagePickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let {
+            viewModel.updateProfilePicture(it)
+        }
+    }
+
+    val backgroundImagePickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let {
+            viewModel.updateBackgroundImage(it)
+        }
+    }
 
     AppTheme {
         Box(
@@ -97,7 +115,13 @@ fun PantallaPerfilUsuario(
                 ) {
                     ProfileHeader(
                         profilePictureUrl = user.profilePictureUrl,
-                        backgroundImageUrl = user.backgroundImageUrl
+                        backgroundImageUrl = user.backgroundImageUrl,
+                        onEditProfileClick = {
+                            profileImagePickerLauncher.launch("image/*")
+                        },
+                        onEditBackgroundClick = {
+                            backgroundImagePickerLauncher.launch("image/*")
+                        }
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))

@@ -1,5 +1,6 @@
 package com.example.app_2.ui.features.perfil_usuario.viewmodel
 
+import android.net.Uri
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -60,6 +61,38 @@ class PerfilUsuarioViewModel @Inject constructor(
     fun updateAddress(newAddress: String) {
         updateField("address", newAddress) { user, value -> user.copy(address = value) }
         onDismissUpdateAddressDialog()
+    }
+
+    fun updateProfilePicture(uri: Uri) {
+        viewModelScope.launch {
+            val currentUser = state.value.user
+            if (currentUser != null) {
+                try {
+                    _state.value = _state.value.copy(isLoading = true)
+                    val downloadUrl = userRepository.updateProfilePicture(currentUser.userId, uri)
+                    val updatedUser = currentUser.copy(profilePictureUrl = downloadUrl)
+                    _state.value = _state.value.copy(user = updatedUser, isLoading = false)
+                } catch (e: Exception) {
+                    _state.value = _state.value.copy(error = "Error al actualizar la foto de perfil.", isLoading = false)
+                }
+            }
+        }
+    }
+
+    fun updateBackgroundImage(uri: Uri) {
+        viewModelScope.launch {
+            val currentUser = state.value.user
+            if (currentUser != null) {
+                try {
+                    _state.value = _state.value.copy(isLoading = true)
+                    val downloadUrl = userRepository.updateBackgroundImage(currentUser.userId, uri)
+                    val updatedUser = currentUser.copy(backgroundImageUrl = downloadUrl)
+                    _state.value = _state.value.copy(user = updatedUser, isLoading = false)
+                } catch (e: Exception) {
+                    _state.value = _state.value.copy(error = "Error al actualizar la imagen de fondo.", isLoading = false)
+                }
+            }
+        }
     }
 
     private fun <T> updateField(fieldName: String, value: T, updateUser: (User, T) -> User) {

@@ -22,21 +22,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.app_2.R
-// import coil.compose.rememberAsyncImagePainter
 
 @Composable
-fun ProfileHeader(profilePictureUrl: String, backgroundImageUrl: String) {
+fun ProfileHeader(
+    profilePictureUrl: String,
+    backgroundImageUrl: String,
+    onEditProfileClick: () -> Unit,
+    onEditBackgroundClick: () -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(280.dp)
     ) {
         // Imagen de fondo
-        // TODO: Usar una librería como Coil para cargar imágenes desde una URL
-        // val backgroundImage = rememberAsyncImagePainter(backgroundImageUrl.ifEmpty { R.drawable.dcori })
-        Image(
-            painter = painterResource(id = R.drawable.dcori), // Placeholder
+        AsyncImage(
+            model = backgroundImageUrl.ifEmpty { R.drawable.dcori },
             contentDescription = "Imagen de fondo",
             modifier = Modifier
                 .fillMaxWidth()
@@ -44,18 +47,19 @@ fun ProfileHeader(profilePictureUrl: String, backgroundImageUrl: String) {
             contentScale = ContentScale.Crop
         )
 
-        // Ícono de mascota en la esquina superior derecha
+        // Botón para editar imagen de fondo
         IconButton(
-            onClick = { /* Acción */ },
+            onClick = onEditBackgroundClick,
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .padding(8.dp)
+                .background(MaterialTheme.colorScheme.primary, CircleShape)
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.perrologo),
-                contentDescription = "Mascota",
-                tint = Color.White,
-                modifier = Modifier.size(32.dp)
+                imageVector = Icons.Outlined.Edit,
+                contentDescription = "Editar imagen de fondo",
+                tint = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier.size(20.dp)
             )
         }
 
@@ -65,9 +69,8 @@ fun ProfileHeader(profilePictureUrl: String, backgroundImageUrl: String) {
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 20.dp)
         ) {
-            // val profileImage = rememberAsyncImagePainter(profilePictureUrl.ifEmpty { R.drawable.dcori })
-            Image(
-                painter = painterResource(id = R.drawable.dcori), // Placeholder
+            AsyncImage(
+                model = profilePictureUrl.ifEmpty { R.drawable.dcori },
                 contentDescription = "Foto de perfil",
                 modifier = Modifier
                     .size(120.dp)
@@ -76,9 +79,9 @@ fun ProfileHeader(profilePictureUrl: String, backgroundImageUrl: String) {
                 contentScale = ContentScale.Crop
             )
 
-            // Botón de editar
+            // Botón de editar foto de perfil
             IconButton(
-                onClick = { /* Acción editar */ },
+                onClick = onEditProfileClick,
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .size(36.dp)
@@ -87,7 +90,7 @@ fun ProfileHeader(profilePictureUrl: String, backgroundImageUrl: String) {
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Edit,
-                    contentDescription = "Editar",
+                    contentDescription = "Editar foto de perfil",
                     tint = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier.size(20.dp)
                 )
