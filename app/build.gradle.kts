@@ -44,9 +44,6 @@ android {
     buildFeatures {
         compose = true
     }
-    kotlin {
-        jvmToolchain(11)
-    }
 }
 
 dependencies {
