@@ -15,7 +15,10 @@ import androidx.navigation.NavController
 import com.example.app_2.R
 
 @Composable
-fun ActionIcons(navController: NavController) {
+fun ActionIcons(
+    navController: NavController,
+    profilePictureUrl: String
+) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -42,7 +45,8 @@ fun ActionIcons(navController: NavController) {
         )
         ProfileImage(
             navController = navController,
-            destinationRoute = "perfil_usuario_screen"
+            destinationRoute = "perfil_usuario_screen",
+            profilePictureUrl = profilePictureUrl
         )
     }
 }

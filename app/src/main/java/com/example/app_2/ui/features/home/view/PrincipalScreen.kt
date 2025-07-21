@@ -38,7 +38,8 @@ fun PrincipalScreen(
                 // Header Section
                 HeaderSection(
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 20.dp),
-                    navController = navController
+                    navController = navController,
+                    profilePictureUrl = state.user?.profilePictureUrl ?: ""
                 )
 
                 // Content Section

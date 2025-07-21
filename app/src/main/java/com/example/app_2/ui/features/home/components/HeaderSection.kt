@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 fun HeaderSection(
     modifier: Modifier = Modifier,
     navController: NavController,
+    profilePictureUrl: String
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -19,6 +20,9 @@ fun HeaderSection(
         verticalAlignment = Alignment.CenterVertically
     ) {
         LocationInfo()
-        ActionIcons(navController = navController)
+        ActionIcons(
+            navController = navController,
+            profilePictureUrl = profilePictureUrl
+        )
     }
 }

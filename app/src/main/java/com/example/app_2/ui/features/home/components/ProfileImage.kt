@@ -1,6 +1,5 @@
 package com.example.app_2.ui.features.home.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -13,15 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.example.app_2.R
 
 @Composable
 fun ProfileImage(
     navController: NavController,
     destinationRoute: String,
+    profilePictureUrl: String
 ) {
     Box(
         modifier = Modifier
@@ -33,9 +33,9 @@ fun ProfileImage(
                 navController.navigate(destinationRoute)
             }
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.dcori),
-            contentDescription = "Perfil",
+        AsyncImage(
+            model = profilePictureUrl.ifEmpty { R.drawable.dcori },
+            contentDescription = "Foto de perfil",
             modifier = Modifier
                 .fillMaxSize()
                 .clip(CircleShape),
