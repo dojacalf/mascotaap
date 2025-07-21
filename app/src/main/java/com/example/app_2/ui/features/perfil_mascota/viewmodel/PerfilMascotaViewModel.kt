@@ -40,24 +40,23 @@ class PerfilMascotaViewModel @Inject constructor(
     private fun loadPetDetails(petId: String) {
         viewModelScope.launch {
             state = state.copy(isLoading = true)
-            val result = petRepository.getPetById(petId)
-            result.onSuccess { pet ->
-                state = state.copy(pet = pet)
+            petRepository.getPetById(petId).onSuccess { pet ->
                 if (pet != null) {
-                    loadOwnerDetails(pet.ownerId)
+                    // First, update the state with the pet information
+                    state = state.copy(isLoading = false, pet = pet, error = null)
+
+                    // Then, try to load the owner details.
+                    // If it fails, the UI will gracefully handle the null owner.
+                    if (pet.ownerId.isNotBlank()) {
+                        val owner = userRepository.getUserProfile(pet.ownerId)
+                        state = state.copy(owner = owner)
+                    }
                 } else {
                     state = state.copy(isLoading = false, error = "Pet not found")
                 }
             }.onFailure {
                 state = state.copy(isLoading = false, error = it.message)
             }
-        }
-    }
-
-    private fun loadOwnerDetails(ownerId: String) {
-        viewModelScope.launch {
-            val owner = userRepository.getUserProfile(ownerId)
-            state = state.copy(isLoading = false, owner = owner, error = if (owner == null) "Owner not found" else null)
         }
     }
 }
