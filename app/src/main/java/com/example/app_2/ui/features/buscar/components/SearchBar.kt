@@ -21,14 +21,13 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
 fun SearchBar(
-    searchText: TextFieldValue,
-    onSearchTextChange: (TextFieldValue) -> Unit,
+    searchText: String,
+    onSearchTextChange: (String) -> Unit,
     focusRequester: FocusRequester,
     navController: NavController
 ) {
@@ -73,7 +72,6 @@ fun SearchBar(
             keyboardActions = KeyboardActions(
                 onSearch = {
                     keyboardController?.hide()
-                    // Aquí iría la lógica real de búsqueda
                 }
             )
         )

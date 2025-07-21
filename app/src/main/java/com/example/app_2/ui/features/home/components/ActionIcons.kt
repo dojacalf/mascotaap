@@ -24,14 +24,6 @@ fun ActionIcons(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(onClick = { navController.navigate(AppScreens.BuscarScreen.route) }) {
-            Icon(
-                painter = painterResource(id = R.drawable.buscar),
-                contentDescription = "Buscar",
-                tint = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.size(24.dp)
-            )
-        }
         IconButton(onClick = { navController.navigate(AppScreens.NotificationsScreen.route) }) {
             Icon(
                 painter = painterResource(id = R.drawable.noti),

@@ -13,4 +13,18 @@ data class Pet(
     val ownerId: String = "",
     val ownerName: String = "",
     val imageUrl: String = ""
-)
+){
+    fun toMap(): Map<String, Any> {
+        return mapOf(
+            "id" to id,
+            "name" to name,
+            "age" to age,
+            "type" to type,
+            "sex" to sex,
+            "description" to description,
+            "ownerId" to ownerId,
+            "ownerName" to ownerName,
+            "imageUrl" to imageUrl
+        )
+    }
+}

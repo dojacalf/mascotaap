@@ -71,19 +71,34 @@ class PetRepositoryImpl @Inject constructor(
         }
     }
 
-    // Helper function to convert Pet to Map
-    private fun Pet.toMap(): Map<String, Any> {
-        return mapOf(
-            "id" to id,
-            "name" to name,
-            "age" to age,
-            "type" to type,
-            "sex" to sex,
-            "description" to description,
-            "ownerId" to ownerId,
-            "ownerName" to ownerName,
-            "imageUrl" to imageUrl
-        )
+    override fun searchPets(query: String): Flow<Result<List<Pet>>> = callbackFlow {
+        val nameQuery = firestore.collection("pets")
+            .orderBy("name")
+            .startAt(query)
+            .endAt(query + '\uf8ff')
+
+        val typeQuery = firestore.collection("pets")
+            .orderBy("type")
+            .startAt(query)
+            .endAt(query + '\uf8ff')
+
+        val nameListener = nameQuery.addSnapshotListener { nameSnapshot, error ->
+            if (error != null) {
+                trySend(Result.failure(error))
+                return@addSnapshotListener
+            }
+
+            typeQuery.get().addOnSuccessListener { typeSnapshot ->
+                val nameResults = nameSnapshot?.toObjects(Pet::class.java) ?: emptyList()
+                val typeResults = typeSnapshot?.toObjects(Pet::class.java) ?: emptyList()
+                val combinedResults = (nameResults + typeResults).distinctBy { it.id }
+                trySend(Result.success(combinedResults))
+            }.addOnFailureListener {
+                trySend(Result.failure(it))
+            }
+        }
+
+        awaitClose { nameListener.remove() }
     }
 }
 
