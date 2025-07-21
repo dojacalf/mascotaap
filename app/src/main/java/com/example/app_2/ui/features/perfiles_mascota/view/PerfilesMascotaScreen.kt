@@ -8,17 +8,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateMapOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.Font
@@ -26,36 +24,18 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.app_2.R
-import com.example.app_2.ui.features.perfiles_mascota.components.ActionPanel
-import com.example.app_2.ui.features.perfiles_mascota.components.PetGrid
+import com.example.app_2.ui.features.perfiles_mascota.components.PetFeed
+import com.example.app_2.ui.features.perfiles_mascota.viewmodel.PerfilesMascotaViewModel
 import com.example.app_2.ui.theme.AppTheme
-
-data class Pet(
-    val id: String,
-    val name: String,
-    val imageRes: Int
-)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PerfilesMascotaScreen() {
-    val pets = remember {
-        listOf(
-            Pet("1", "tatiana", R.drawable.mujer_mascota),
-            Pet("2", "Castillo", R.drawable.mujer_mascota),
-            Pet("3", "Pedro", R.drawable.mujer_mascota),
-            Pet("4", "Boluerte", R.drawable.mujer_mascota),
-            Pet("5", "Pelusa", R.drawable.mujer_mascota),
-            Pet("6", "Mac", R.drawable.mujer_mascota),
-            Pet("7", "Alexis", R.drawable.mujer_mascota),
-            Pet("8", "Chow Chow", R.drawable.mujer_mascota),
-            Pet("9", "Paísana", R.drawable.mujer_mascota)
-        )
-    }
-
-    var selectedPetId by remember { mutableStateOf<String?>(null) }
-    val favoritePets = remember { mutableStateMapOf<String, Boolean>() }
+fun PerfilesMascotaScreen(
+    viewModel: PerfilesMascotaViewModel = hiltViewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
 
     AppTheme {
         Scaffold(
@@ -89,24 +69,30 @@ fun PerfilesMascotaScreen() {
                         .fillMaxSize()
                         .background(MaterialTheme.colorScheme.background)
                 ) {
-                    PetGrid(
-                        pets = pets,
-                        selectedPetId = selectedPetId,
-                        favoritePets = favoritePets,
-                        onPetSelected = { petId ->
-                            selectedPetId = if (selectedPetId == petId) null else petId
-                        },
-                        onToggleFavorite = { petId ->
-                            favoritePets[petId] = !(favoritePets[petId] ?: false)
+                    if (uiState.isLoading) {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
                         }
-                    )
+                    }
 
-                    selectedPetId?.let { petId ->
-                        val pet = pets.first { it.id == petId }
-                        ActionPanel(
-                            petName = pet.name,
-                            onAdopt = { /* Lógica de adopción */ },
-                            onCancel = { selectedPetId = null }
+                    uiState.error?.let { error ->
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(text = error, color = MaterialTheme.colorScheme.error)
+                        }
+                    }
+
+                    if (!uiState.isLoading && uiState.error == null) {
+                        PetFeed(
+                            posts = uiState.posts,
+                            onAdoptClick = { petId ->
+                                // TODO: Handle adoption click
+                            }
                         )
                     }
                 }
@@ -119,6 +105,7 @@ fun PerfilesMascotaScreen() {
 @Composable
 fun PetAdoptionScreenPreview() {
     AppTheme {
+        // This preview will be basic as it cannot instantiate the ViewModel
         PerfilesMascotaScreen()
     }
 }
