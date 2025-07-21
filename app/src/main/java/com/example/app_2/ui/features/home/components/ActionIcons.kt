@@ -13,6 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.app_2.R
+import com.example.app_2.navigation.AppScreens
 
 @Composable
 fun ActionIcons(
@@ -23,7 +24,7 @@ fun ActionIcons(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(onClick = { navController.navigate("busqueda") }) {
+        IconButton(onClick = { navController.navigate(AppScreens.BuscarScreen.route) }) {
             Icon(
                 painter = painterResource(id = R.drawable.buscar),
                 contentDescription = "Buscar",
@@ -31,7 +32,7 @@ fun ActionIcons(
                 modifier = Modifier.size(24.dp)
             )
         }
-        IconButton(onClick = { navController.navigate("notificaciones") }) {
+        IconButton(onClick = { navController.navigate(AppScreens.NotificationsScreen.route) }) {
             Icon(
                 painter = painterResource(id = R.drawable.noti),
                 contentDescription = "Notificaciones",
@@ -41,7 +42,7 @@ fun ActionIcons(
         }
         ProfileImage(
             navController = navController,
-            destinationRoute = "perfil_usuario_screen",
+            destinationRoute = AppScreens.PerfilUsuarioScreen.route,
             profilePictureUrl = profilePictureUrl
         )
     }

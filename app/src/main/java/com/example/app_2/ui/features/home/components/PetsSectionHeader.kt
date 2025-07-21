@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
+import com.example.app_2.navigation.AppScreens
 
 @Composable
 fun PetsSectionHeader(navController: NavController) {
@@ -28,7 +29,7 @@ fun PetsSectionHeader(navController: NavController) {
             "Ver todo",
             color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.clickable { navController.navigate("ver_todo")}
+            modifier = Modifier.clickable { navController.navigate(AppScreens.PerfilesMascotaScreen.route) }
         )
     }
 }
