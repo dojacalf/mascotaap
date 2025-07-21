@@ -22,7 +22,6 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.app_2.navigation.AppScreens
 import com.example.app_2.ui.features.perfil_mascota.components.Boton_adoptar
-import com.example.app_2.ui.features.perfil_mascota.components.Boton_llamar
 import com.example.app_2.ui.features.perfil_mascota.components.Boton_mensaje
 import com.example.app_2.ui.features.perfil_mascota.components.Parte_5_descripcion
 import com.example.app_2.ui.features.perfil_mascota.components.PetOwnerInfo
@@ -179,12 +178,17 @@ fun PetPerfilScreen(
                                     },
                                     modifier = Modifier.weight(1f)
                                 )
-                                Boton_mensaje(onClick = { navController.navigate("chat") }, modifier = Modifier.padding(end = 8.dp))
-                                Boton_llamar(onClick = { /* ... */ })
+                                Boton_mensaje(
+                                    onClick = { navController.navigate(AppScreens.ChatScreen.createRoute(pet.id)) },
+                                    modifier = Modifier.padding(end = 8.dp)
+                                )
                             }
 
                             Parte_5_descripcion(description = pet.description, modifier = Modifier.weight(1f).padding(bottom = 20.dp))
-                            Boton_adoptar(onClick = { /* ... */ }, modifier = Modifier.fillMaxWidth())
+                            Boton_adoptar(
+                                onClick = { navController.navigate(AppScreens.ChatScreen.createRoute(pet.id)) },
+                                modifier = Modifier.fillMaxWidth()
+                            )
                         }
                     }
                     Spacer(

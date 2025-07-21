@@ -93,7 +93,10 @@ fun AppNavigation() {
         composable(route = AppScreens.MapaScreen.route) {
             MapaScreen(onBackClick = { navController.popBackStack() })
         }
-        composable(route = AppScreens.ChatScreen.route) {
+        composable(
+            route = AppScreens.ChatScreen.route + "/{petId}",
+            arguments = listOf(navArgument("petId") { type = NavType.StringType})
+        ){
             ChatScreen(navController = navController)
         }
         composable(route = AppScreens.Encuentra2Screen.route) {
@@ -106,7 +109,7 @@ fun AppNavigation() {
             NotificationsScreen()
         }
         composable(route = AppScreens.PerfilesMascotaScreen.route) {
-            PerfilesMascotaScreen()
+            PerfilesMascotaScreen(navController = navController)
         }
     }
 }

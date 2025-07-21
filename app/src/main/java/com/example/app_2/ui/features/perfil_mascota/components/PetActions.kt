@@ -42,29 +42,6 @@ fun Boton_adoptar(
 }
 
 @Composable
-fun Boton_llamar(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Button(
-        onClick = onClick,
-        modifier = modifier.size(40.dp),
-        shape = CircleShape,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.errorContainer
-        ),
-        contentPadding = PaddingValues(0.dp)
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.llamarsvg),
-            contentDescription = "Llamar",
-            tint = MaterialTheme.colorScheme.onErrorContainer,
-            modifier = Modifier.size(24.dp)
-        )
-    }
-}
-
-@Composable
 fun Boton_mensaje(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,

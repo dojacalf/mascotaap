@@ -5,6 +5,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Pets
+import androidx.compose.material.icons.filled.Sms
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -78,19 +79,29 @@ fun PetPostCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                IconButton(onClick = { /* TODO: Handle like */ }) {
-                    Icon(Icons.Default.FavoriteBorder, contentDescription = "Like")
+                Row {
+                    IconButton(onClick = { /* TODO: Handle like */ }) {
+                        Icon(Icons.Default.FavoriteBorder, contentDescription = "Like")
+                    }
                 }
-                Spacer(modifier = Modifier.weight(1f))
-                Button(
-                    onClick = { onAdoptClick(post.pet.id) },
-                    modifier = Modifier.padding(end = 8.dp)
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(Icons.Default.Pets, contentDescription = "Adopt")
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text("Adoptar")
+                    IconButton(onClick = { onAdoptClick(post.pet.id) }) {
+                        Icon(Icons.Default.Sms, contentDescription = "Message")
+                    }
+                    Button(
+                        onClick = { onAdoptClick(post.pet.id) },
+                        modifier = Modifier.padding(end = 8.dp)
+                    ) {
+                        Icon(Icons.Default.Pets, contentDescription = "Adopt")
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text("Adoptar")
+                    }
                 }
             }
 

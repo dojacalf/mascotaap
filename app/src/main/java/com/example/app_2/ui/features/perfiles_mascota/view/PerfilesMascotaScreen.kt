@@ -25,7 +25,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.app_2.R
+import com.example.app_2.navigation.AppScreens
 import com.example.app_2.ui.features.perfiles_mascota.components.PetFeed
 import com.example.app_2.ui.features.perfiles_mascota.viewmodel.PerfilesMascotaViewModel
 import com.example.app_2.ui.theme.AppTheme
@@ -33,6 +35,7 @@ import com.example.app_2.ui.theme.AppTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PerfilesMascotaScreen(
+    navController: NavController,
     viewModel: PerfilesMascotaViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -91,7 +94,7 @@ fun PerfilesMascotaScreen(
                         PetFeed(
                             posts = uiState.posts,
                             onAdoptClick = { petId ->
-                                // TODO: Handle adoption click
+                                navController.navigate(AppScreens.ChatScreen.createRoute(petId))
                             }
                         )
                     }
@@ -106,6 +109,6 @@ fun PerfilesMascotaScreen(
 fun PetAdoptionScreenPreview() {
     AppTheme {
         // This preview will be basic as it cannot instantiate the ViewModel
-        PerfilesMascotaScreen()
+       // PerfilesMascotaScreen()
     }
 }

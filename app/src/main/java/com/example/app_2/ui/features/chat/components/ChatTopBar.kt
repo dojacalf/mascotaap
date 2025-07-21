@@ -1,19 +1,11 @@
 package com.example.app_2.ui.features.chat.components
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Call
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,28 +17,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.app_2.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatTopBar(navController: NavController) {
+fun ChatTopBar(
+    navController: NavController,
+    ownerName: String,
+    petImageUrl: String
+) {
     TopAppBar(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Image(
-                    painter = painterResource(id = R.drawable.perro2),
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(petImageUrl)
+                        .crossfade(true)
+                        .error(R.drawable.perro2) // Placeholder
+                        .build(),
                     contentDescription = "Avatar",
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .size(36.dp)
                         .clip(CircleShape)
                 )
                 Text(
-                    text = "Daniel Gusman",
+                    text = ownerName,
                     modifier = Modifier.padding(start = 12.dp),
                     style = MaterialTheme.typography.titleMedium
                 )
@@ -60,15 +62,7 @@ fun ChatTopBar(navController: NavController) {
                 )
             }
         },
-        actions = {
-            IconButton(onClick = { /* TODO: Llamar */ }) {
-                Icon(
-                    imageVector = Icons.Default.Call,
-                    contentDescription = "Llamar",
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
-        },
+        actions = {},
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.surface
         )

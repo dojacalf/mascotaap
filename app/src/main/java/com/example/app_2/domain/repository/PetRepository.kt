@@ -8,5 +8,6 @@ interface PetRepository {
     suspend fun registerPet(pet: Pet): Result<Unit>
     fun getAllPets(): Flow<Result<List<Pet>>>
     suspend fun getPetById(petId: String): Result<Pet?>
+    //uspend fun getPetById(petId: String): Result<Pet?>
     suspend fun uploadPetImage(imageUri: Uri): Result<String>
 }
