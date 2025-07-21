@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
@@ -16,11 +15,12 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -47,38 +47,40 @@ fun InputSection(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        BrandTextField(
+        OutlinedTextField(
             value = email,
             onValueChange = onEmailChange,
-            label = "Correo electrónico",
-            leading = {
+            label = { Text("Correo electrónico") },
+            leadingIcon = {
                 Icon(
                     Icons.Default.Email,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    tint = MaterialTheme.colorScheme.primary
                 )
-            }
+            },
+            modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(Modifier.height(16.dp))
 
-        BrandTextField(
+        OutlinedTextField(
             value = password,
             onValueChange = onPasswordChange,
-            label = "Contraseña",
-            isPassword = true,
-            leading = {
+            label = { Text("Contraseña") },
+            leadingIcon = {
                 Icon(
                     Icons.Default.Lock,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    tint = MaterialTheme.colorScheme.primary
                 )
-            }
+            },
+            visualTransformation = PasswordVisualTransformation(),
+            modifier = Modifier.fillMaxWidth()
         )
 
         Text(
             "¿Olvidaste tu contraseña?",
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier
                 .align(Alignment.End)
@@ -100,10 +102,10 @@ fun InputSection(
                 disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant,
                 disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
             ),
-            shape = RoundedCornerShape(16.dp),
+            shape = MaterialTheme.shapes.large,
             elevation = ButtonDefaults.buttonElevation(
-                defaultElevation = 3.dp,
-                pressedElevation = 6.dp,
+                defaultElevation = 4.dp,
+                pressedElevation = 8.dp,
                 disabledElevation = 0.dp
             )
         ) {

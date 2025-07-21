@@ -10,7 +10,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,8 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.app_2.navigation.AppNavigation
-import com.example.app_2.ui.theme.AppTheme // Importa tu tema personalizado
 
 
 @Composable
@@ -34,17 +31,23 @@ fun StartButton(
             .fillMaxWidth(0.8f),
         shape = MaterialTheme.shapes.large,
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary
         ),
         elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = 2.dp,
+            defaultElevation = 4.dp,
             pressedElevation = 8.dp
         )
     ) {
+        Icon(
+            imageVector = Icons.Default.PlayArrow,
+            contentDescription = "Start Icon",
+            modifier = Modifier.size(ButtonDefaults.IconSize)
+        )
+        Spacer(Modifier.width(ButtonDefaults.IconSpacing))
         Text(
             text = "EMPEZAR",
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
         )
     }
 }

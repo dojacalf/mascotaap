@@ -1,21 +1,20 @@
 package com.example.app_2.ui.features.configuracion.view
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.app_2.ui.features.configuracion.components.AccessSection
@@ -24,6 +23,7 @@ import com.example.app_2.ui.features.configuracion.components.PersonalizationSec
 import com.example.app_2.ui.features.configuracion.components.SettingsHeader
 import com.example.app_2.ui.theme.AppTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConfiguracionScreen(navController: NavController) {
     // Estados para los switches
@@ -34,22 +34,16 @@ fun ConfiguracionScreen(navController: NavController) {
     var notificacionesCorreoActivadas by remember { mutableStateOf(true) }
 
     AppTheme {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(16.dp)
-        ) {
-            // Contenido de la pantalla de ajustes
+        Scaffold(
+            topBar = { SettingsHeader(navController = navController) },
+            containerColor = Color.Transparent
+        ) { padding ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .clip(RoundedCornerShape(30.dp))
-                    .background(MaterialTheme.colorScheme.surface)
-                    .padding(horizontal = 20.dp)
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(padding)
             ) {
-                SettingsHeader(navController = navController)
-
                 PersonalizationSection(
                     modoOscuroActivado = modoOscuroActivado,
                     onModoOscuroChanged = { modoOscuroActivado = it }

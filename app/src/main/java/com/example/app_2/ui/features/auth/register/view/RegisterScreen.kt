@@ -22,8 +22,9 @@ import com.example.app_2.ui.features.auth.register.viewmodel.AuthState
 import com.example.app_2.ui.features.auth.register.viewmodel.RegisterViewModel
 import com.example.app_2.ui.theme.AppTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Registro(
+fun RegisterScreen(
     navController: NavController,
     viewModel: RegisterViewModel = hiltViewModel()
 ) {
@@ -47,28 +48,32 @@ fun Registro(
     }
 
     AppTheme {
-        Box(
-            Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-        ) {
-            Column(
-                modifier = Modifier
+        Scaffold { padding ->
+            Box(
+                Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(padding)
             ) {
-                HeaderSection()
-                FormSection(
-                    email = email,
-                    onEmailChange = { email = it },
-                    password = password,
-                    onPasswordChange = { password = it },
-                    onRegisterClick = { viewModel.createAccount(email, password) },
-                    authState = authState
-                )
-                SocialLoginSection()
-                FooterSection()
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceAround
+                ) {
+                    HeaderSection()
+                    FormSection(
+                        email = email,
+                        onEmailChange = { email = it },
+                        password = password,
+                        onPasswordChange = { password = it },
+                        onRegisterClick = { viewModel.createAccount(email, password) },
+                        authState = authState
+                    )
+                    SocialLoginSection()
+                    FooterSection()
+                }
             }
         }
     }
@@ -76,6 +81,6 @@ fun Registro(
 
 @Preview(showBackground = true)
 @Composable
-fun RegistroPreview() {
-    Registro(navController = rememberNavController())
+fun RegisterScreenPreview() {
+    RegisterScreen(navController = rememberNavController())
 }

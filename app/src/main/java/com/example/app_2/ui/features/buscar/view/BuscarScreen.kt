@@ -2,12 +2,11 @@ package com.example.app_2.ui.features.buscar.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -42,25 +41,28 @@ fun BuscarScreen(navController: NavController) {
     }
 
     AppTheme {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(16.dp)
-        ) {
-            SearchBar(
-                searchText = searchText,
-                onSearchTextChange = { searchText = it },
-                focusRequester = focusRequester,
-                navController = navController
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            SearchResultsList(
-                filteredResults = filteredResults,
-                modifier = Modifier.weight(1f)
-            )
+        Scaffold(
+            topBar = {
+                SearchBar(
+                    searchText = searchText,
+                    onSearchTextChange = { searchText = it },
+                    focusRequester = focusRequester,
+                    navController = navController
+                )
+            }
+        ) { padding ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(padding)
+                    .padding(16.dp)
+            ) {
+                SearchResultsList(
+                    filteredResults = filteredResults,
+                    modifier = Modifier.weight(1f)
+                )
+            }
         }
     }
 

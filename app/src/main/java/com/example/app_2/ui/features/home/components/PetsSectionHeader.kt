@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
@@ -22,13 +21,13 @@ fun PetsSectionHeader(navController: NavController) {
     ) {
         Text(
             "Adopta una mascota",
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold
         )
         Text(
             "Ver todo",
             color = MaterialTheme.colorScheme.primary,
-            fontSize = 12.sp,
+            style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.clickable { navController.navigate("ver_todo")}
         )
     }

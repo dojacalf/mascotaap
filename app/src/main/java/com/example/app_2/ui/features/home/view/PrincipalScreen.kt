@@ -20,6 +20,7 @@ import com.example.app_2.ui.features.home.components.PetsSection
 import com.example.app_2.ui.features.home.viewmodel.HomeViewModel
 import com.example.app_2.ui.theme.AppTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PrincipalScreen(
     navController: NavController,
@@ -28,51 +29,55 @@ fun PrincipalScreen(
     val state = viewModel.state
 
     AppTheme {
-        Box(modifier = Modifier.fillMaxSize()) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background)
-                    .verticalScroll(rememberScrollState())
-            ) {
-                // Header Section
+        Scaffold(
+            topBar = {
                 HeaderSection(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 20.dp),
+                    modifier = Modifier.padding(horizontal = 24.dp, vertical = 24.dp),
                     navController = navController,
                     profilePictureUrl = state.user?.profilePictureUrl ?: ""
                 )
-
-                // Content Section
+            }
+        ) { padding ->
+            Box(modifier = Modifier.fillMaxSize().padding(padding)) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(horizontal = 16.dp)
+                        .background(MaterialTheme.colorScheme.background)
+                        .verticalScroll(rememberScrollState())
+                        .padding(bottom = 32.dp)
                 ) {
-                    // Banner Section
-                    BannerSection()
+                    // Content Section
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 24.dp)
+                    ) {
+                        // Banner Section
+                        BannerSection()
 
-                    Spacer(modifier = Modifier.height(60.dp))
+                        Spacer(modifier = Modifier.height(32.dp))
 
-                    // Categories Section
-                    CategoriesSection()
+                        // Categories Section
+                        CategoriesSection()
 
-                    Spacer(modifier = Modifier.height(60.dp))
+                        Spacer(modifier = Modifier.height(32.dp))
 
-                    // Pets Section
-                    PetsSection(navController = navController, pets = state.pets)
+                        // Pets Section
+                        PetsSection(navController = navController, pets = state.pets)
+                    }
                 }
-            }
 
-            if (state.isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            }
+                if (state.isLoading) {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                }
 
-            state.error?.let {
-                Text(
-                    text = it,
-                    modifier = Modifier.align(Alignment.Center),
-                    color = MaterialTheme.colorScheme.error
-                )
+                state.error?.let {
+                    Text(
+                        text = it,
+                        modifier = Modifier.align(Alignment.Center),
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
             }
         }
     }

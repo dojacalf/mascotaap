@@ -1,6 +1,5 @@
 package com.example.app_2.ui.features.home.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,7 +14,6 @@ fun PetCardHeader(ownerName: String) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(12.dp),
-        horizontalArrangement = Arrangement.End, // Alineamos todo a la derecha
         verticalAlignment = Alignment.CenterVertically
     ) {
         FavoriteButton()

@@ -1,10 +1,10 @@
 package com.example.app_2.ui.features.home.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,26 +23,22 @@ fun ActionIcons(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            painter = painterResource(id = R.drawable.buscar),
-            contentDescription = "Buscar",
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier
-                .size(24.dp)
-                .clickable {
-                    navController.navigate("busqueda")
-                }
-        )
-        Icon(
-            painter = painterResource(id = R.drawable.noti),
-            contentDescription = "Notificaciones",
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier
-                .size(24.dp)
-                .clickable {
-                    navController.navigate("notificaciones")
-                }
-        )
+        IconButton(onClick = { navController.navigate("busqueda") }) {
+            Icon(
+                painter = painterResource(id = R.drawable.buscar),
+                contentDescription = "Buscar",
+                tint = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.size(24.dp)
+            )
+        }
+        IconButton(onClick = { navController.navigate("notificaciones") }) {
+            Icon(
+                painter = painterResource(id = R.drawable.noti),
+                contentDescription = "Notificaciones",
+                tint = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.size(24.dp)
+            )
+        }
         ProfileImage(
             navController = navController,
             destinationRoute = "perfil_usuario_screen",

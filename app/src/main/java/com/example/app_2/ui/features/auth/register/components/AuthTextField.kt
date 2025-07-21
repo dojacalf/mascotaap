@@ -25,7 +25,9 @@ fun AuthTextField(
     onValueChange: (String) -> Unit,
     hint: String,
     leadingIconRes: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isPassword: Boolean = false,
+    isError: Boolean = false
 ) {
     OutlinedTextField(
         value = value,
@@ -33,7 +35,7 @@ fun AuthTextField(
         placeholder = {
             Text(
                 hint,
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         },
@@ -41,22 +43,25 @@ fun AuthTextField(
             Icon(
                 painter = painterResource(leadingIconRes),
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                tint = MaterialTheme.colorScheme.primary
             )
         },
         singleLine = true,
-        shape = RoundedCornerShape(8.dp),
+        shape = MaterialTheme.shapes.large,
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedBorderColor = MaterialTheme.colorScheme.outline,
             focusedBorderColor = MaterialTheme.colorScheme.primary,
             unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-            focusedContainerColor = MaterialTheme.colorScheme.surface
+            focusedContainerColor = MaterialTheme.colorScheme.surface,
+            errorBorderColor = MaterialTheme.colorScheme.error
         ),
-        textStyle = MaterialTheme.typography.bodySmall.copy(
+        textStyle = MaterialTheme.typography.bodyLarge.copy(
             color = MaterialTheme.colorScheme.onSurface
         ),
+        isError = isError,
+        visualTransformation = if (isPassword) androidx.compose.ui.text.input.PasswordVisualTransformation() else androidx.compose.ui.text.input.VisualTransformation.None,
         modifier = modifier
             .fillMaxWidth()
-            .height(56.dp)
+            .height(64.dp)
     )
 }

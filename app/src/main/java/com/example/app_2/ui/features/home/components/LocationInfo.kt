@@ -5,20 +5,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 
 @Composable
 fun LocationInfo() {
     Column {
         Text(
             text = "Ubicación",
-            fontSize = 12.sp,
+            style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Text(
             text = "Salcedo, Puno",
+            style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
-            fontSize = 16.sp
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }

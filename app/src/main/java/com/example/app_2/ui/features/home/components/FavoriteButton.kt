@@ -1,9 +1,8 @@
 package com.example.app_2.ui.features.home.components
 
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,12 +12,9 @@ import com.example.app_2.R
 
 @Composable
 fun FavoriteButton() {
-    FilledIconButton(
+    IconButton(
         onClick = { },
-        modifier = Modifier.size(28.dp),
-        colors = IconButtonDefaults.filledIconButtonColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        )
+        modifier = Modifier.size(28.dp)
     ) {
         Icon(
             painter = painterResource(id = R.drawable.cora),

@@ -60,7 +60,6 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-storage-ktx")
 
-
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 

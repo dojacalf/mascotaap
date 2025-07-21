@@ -6,15 +6,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.app_2.R
 import com.example.app_2.ui.features.auth.register.viewmodel.AuthState
@@ -28,54 +34,63 @@ fun FormSection(
     onRegisterClick: () -> Unit,
     authState: AuthState
 ) {
-    AuthTextField(
+    OutlinedTextField(
         value = email,
         onValueChange = onEmailChange,
-        hint = stringResource(R.string.hint_email),
-        leadingIconRes = R.drawable.mail,
-        modifier = Modifier.padding(vertical = 6.dp)
+        label = { Text(stringResource(R.string.hint_email)) },
+        leadingIcon = {
+            Icon(
+                Icons.Default.Email,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary
+            )
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
     )
 
-    AuthTextField(
+    OutlinedTextField(
         value = password,
         onValueChange = onPasswordChange,
-        hint = stringResource(R.string.hint_password),
-        leadingIconRes = R.drawable.lock,
-        modifier = Modifier.padding(vertical = 6.dp)
+        label = { Text(stringResource(R.string.hint_password)) },
+        leadingIcon = {
+            Icon(
+                Icons.Default.Lock,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary
+            )
+        },
+        visualTransformation = PasswordVisualTransformation(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
     )
 
-    OptionRow(
-        iconRes = R.drawable.a,
-        text = stringResource(R.string.option_remember),
-        modifier = Modifier.padding(vertical = 4.dp)
-    )
-
-    OptionRow(
-        iconRes = R.drawable.b,
-        text = stringResource(R.string.option_forgot),
-        modifier = Modifier.padding(vertical = 4.dp)
-    )
-
-    Spacer(Modifier.height(16.dp))
+    Spacer(Modifier.height(24.dp))
 
     Button(
         onClick = onRegisterClick,
         enabled = authState != AuthState.Loading,
-        shape = RoundedCornerShape(8.dp),
+        shape = MaterialTheme.shapes.large,
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor   = MaterialTheme.colorScheme.onPrimaryContainer
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor   = MaterialTheme.colorScheme.onPrimary
         ),
-        elevation = ButtonDefaults.buttonElevation(0.dp),
         modifier  = Modifier
             .fillMaxWidth()
-            .height(48.dp)
+            .height(56.dp)
     ) {
         if (authState == AuthState.Loading) {
-            CircularProgressIndicator(modifier = Modifier.size(24.dp))
+            CircularProgressIndicator(
+                modifier = Modifier.size(24.dp),
+                color = MaterialTheme.colorScheme.onPrimary
+            )
         } else {
-            Text(stringResource(R.string.button_register),
-                style = MaterialTheme.typography.labelLarge)
+            Text(
+                stringResource(R.string.button_register),
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+            )
         }
     }
 }

@@ -16,7 +16,7 @@ import com.example.app_2.ui.features.carga.view.CargaScreen
 import com.example.app_2.ui.features.Maps.view.MapaScreen
 import com.example.app_2.ui.features.Registrar_mascota.view.RegistrarMascotaScreen
 import com.example.app_2.ui.features.auth.login.view.LoginScreen
-import com.example.app_2.ui.features.auth.register.view.Registro
+import com.example.app_2.ui.features.auth.register.view.RegisterScreen
 import com.example.app_2.ui.features.buscar.view.BuscarScreen
 import com.example.app_2.ui.features.chat.view.ChatScreen
 import com.example.app_2.ui.features.configuracion.view.ConfiguracionScreen
@@ -64,7 +64,7 @@ fun AppNavigation() {
             InicioScreen(navController = navController)
         }
         composable(route = AppScreens.RegisterScreen.route) {
-            Registro(navController = navController)
+            RegisterScreen(navController = navController)
         }
         composable(route = AppScreens.BuscarScreen.route) {
             BuscarScreen(navController = navController)

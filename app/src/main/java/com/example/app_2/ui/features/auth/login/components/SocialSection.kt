@@ -21,21 +21,24 @@ fun SocialSection(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 32.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        Spacer(Modifier.height(24.dp))
-
         Text(
             "O conéctate con",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 24.dp)
         )
 
-        SocialButton(R.drawable.google,   "Google",   onGoogle)
-        Spacer(Modifier.height(12.dp))
-        SocialButton(R.drawable.facebook, "Facebook", onFacebook)
-        Spacer(Modifier.height(12.dp))
-        SocialButton(R.drawable.apple,    "Apple",    onApple)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            SocialButton(R.drawable.google, "Google", onGoogle)
+            SocialButton(R.drawable.facebook, "Facebook", onFacebook)
+            SocialButton(R.drawable.apple, "Apple", onApple)
+        }
     }
 }

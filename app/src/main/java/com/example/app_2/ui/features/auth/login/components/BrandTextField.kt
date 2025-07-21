@@ -18,7 +18,8 @@ fun BrandTextField(
     onValueChange: (String) -> Unit,
     label: String,
     leading: @Composable () -> Unit,
-    isPassword: Boolean = false
+    isPassword: Boolean = false,
+    isError: Boolean = false
 ) {
     OutlinedTextField(
         value = value,
@@ -28,14 +29,16 @@ fun BrandTextField(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp),
-        shape = RoundedCornerShape(12.dp),
+        shape = MaterialTheme.shapes.large,
         colors = TextFieldDefaults.colors(
-            focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
-            unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
-            disabledContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+            focusedContainerColor = MaterialTheme.colorScheme.surface,
+            unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+            disabledContainerColor = MaterialTheme.colorScheme.surface,
             focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-            unfocusedIndicatorColor = MaterialTheme.colorScheme.outlineVariant,
+            unfocusedIndicatorColor = MaterialTheme.colorScheme.outline,
+            errorIndicatorColor = MaterialTheme.colorScheme.error,
         ),
-
+        isError = isError,
+        singleLine = true
     )
 }

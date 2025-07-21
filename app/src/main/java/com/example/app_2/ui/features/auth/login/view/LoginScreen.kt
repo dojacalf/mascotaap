@@ -5,7 +5,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,6 +26,7 @@ import com.example.app_2.ui.theme.AppTheme
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     navController: NavController,
@@ -45,38 +49,41 @@ fun LoginScreen(
     }
 
     AppTheme {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .navigationBarsPadding()
-        ) {
-            BackgroundDecorations()
+        Scaffold { padding ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .navigationBarsPadding()
+                    .padding(padding)
+            ) {
+                BackgroundDecorations()
 
-            Column(modifier = Modifier.fillMaxSize()) {
-                LogoSection(Modifier.weight(1f))
+                Column(modifier = Modifier.fillMaxSize()) {
+                    LogoSection(Modifier.weight(1.5f))
 
-                InputSection(
-                    email = viewModel.email,
-                    onEmailChange = { viewModel.email = it },
-                    password = viewModel.password,
-                    onPasswordChange = { viewModel.password = it },
-                    onForgotPassword = { /* TODO: flujo recuperación */ },
-                    onLogin = { viewModel.onLoginClicked() },
-                    modifier = Modifier.weight(2f)
-                )
+                    InputSection(
+                        email = viewModel.email,
+                        onEmailChange = { viewModel.email = it },
+                        password = viewModel.password,
+                        onPasswordChange = { viewModel.password = it },
+                        onForgotPassword = { /* TODO: flujo recuperación */ },
+                        onLogin = { viewModel.onLoginClicked() },
+                        modifier = Modifier.weight(2.5f)
+                    )
 
-                SocialSection(
-                    onGoogle = { /* TODO */ },
-                    onFacebook = { /* TODO */ },
-                    onApple = { /* TODO */ },
-                    modifier = Modifier.weight(1.5f)
-                )
+                    SocialSection(
+                        onGoogle = { /* TODO */ },
+                        onFacebook = { /* TODO */ },
+                        onApple = { /* TODO */ },
+                        modifier = Modifier.weight(1f)
+                    )
 
-                Footer(Modifier.weight(0.2f))
-            }
+                    Footer(Modifier.weight(0.5f))
+                }
 
-            if (state.isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                if (state.isLoading) {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                }
             }
         }
     }
