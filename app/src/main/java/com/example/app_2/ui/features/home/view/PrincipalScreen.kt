@@ -18,7 +18,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.app_2.navigation.AppScreens
-import com.example.app_2.ui.features.home.components.BannerSection
 import com.example.app_2.ui.features.home.components.HeaderSection
 import com.example.app_2.ui.features.home.components.PetsSection
 import com.example.app_2.ui.features.home.viewmodel.HomeViewModel
@@ -56,11 +55,6 @@ fun PrincipalScreen(
                             .fillMaxSize()
                             .padding(horizontal = 24.dp)
                     ) {
-                        // Banner Section
-                        BannerSection()
-
-                        Spacer(modifier = Modifier.height(32.dp))
-
                         // Search Bar
                         Box(
                             modifier = Modifier
