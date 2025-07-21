@@ -14,7 +14,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.app_2.ui.features.home.components.BannerSection
-import com.example.app_2.ui.features.home.components.CategoriesSection
 import com.example.app_2.ui.features.home.components.HeaderSection
 import com.example.app_2.ui.features.home.components.PetsSection
 import com.example.app_2.ui.features.home.viewmodel.HomeViewModel
@@ -54,11 +53,6 @@ fun PrincipalScreen(
                     ) {
                         // Banner Section
                         BannerSection()
-
-                        Spacer(modifier = Modifier.height(32.dp))
-
-                        // Categories Section
-                        CategoriesSection()
 
                         Spacer(modifier = Modifier.height(32.dp))
 
