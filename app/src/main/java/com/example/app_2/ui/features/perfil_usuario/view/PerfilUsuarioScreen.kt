@@ -200,6 +200,13 @@ fun PantallaPerfilUsuario(
                             ruta = AppScreens.RegistrarMascotaScreen.route,
                             navController = navController
                         )
+                        OpcionMenuMejorada(
+                            icono = R.drawable.p1,
+                            texto = "Configuracion",
+                            flechaIcono = R.drawable.ir,
+                            ruta = AppScreens.ConfiguracionScreen.route,
+                            navController = navController
+                        )
                     }
 
 
