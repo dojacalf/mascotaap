@@ -35,6 +35,12 @@ import com.example.app_2.ui.features.perfil_usuario.components.InfoCard
 import com.example.app_2.ui.features.perfil_usuario.components.OpcionMenuMejorada
 import com.example.app_2.ui.features.perfil_usuario.components.ProfileHeader
 import com.example.app_2.ui.features.perfil_usuario.components.UpdatePhoneDialog
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import com.example.app_2.ui.features.perfil_usuario.components.UpdateTextDialog
 import com.example.app_2.ui.features.perfil_usuario.viewmodel.PerfilUsuarioViewModel
 import com.example.app_2.ui.theme.AppTheme
@@ -105,6 +111,15 @@ fun PantallaPerfilUsuario(
                         onConfirm = { viewModel.updateAddress(it) }
                     )
                 }
+                if (viewModel.showUpdateNameDialog) {
+                    UpdateTextDialog(
+                        title = "Actualizar nombre",
+                        label = "Ingresa tu nuevo nombre",
+                        currentValue = user.name,
+                        onDismiss = { viewModel.onDismissUpdateNameDialog() },
+                        onConfirm = { viewModel.updateName(it) }
+                    )
+                }
 
                 // --- Screen Content ---
                 Column(
@@ -126,13 +141,26 @@ fun PantallaPerfilUsuario(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Text(
-                        text = user.name,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = user.name,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                        IconButton(onClick = { viewModel.onShowUpdateNameDialog() }) {
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = "Editar nombre",
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+
 
                     Spacer(modifier = Modifier.height(24.dp))
 

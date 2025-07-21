@@ -20,8 +20,20 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.app_2.R
-import com.example.app_2.ui.features.perfil_mascota.components.*
+import com.example.app_2.navigation.AppScreens
+import com.example.app_2.ui.features.perfil_mascota.components.Boton_adoptar
+import com.example.app_2.ui.features.perfil_mascota.components.Boton_llamar
+import com.example.app_2.ui.features.perfil_mascota.components.Boton_mensaje
+import com.example.app_2.ui.features.perfil_mascota.components.Parte_5_descripcion
+import com.example.app_2.ui.features.perfil_mascota.components.PetOwnerInfo
+import com.example.app_2.ui.features.perfil_mascota.components.TarjetaEdad
+import com.example.app_2.ui.features.perfil_mascota.components.TarjetaGenero
+import com.example.app_2.ui.features.perfil_mascota.components.TarjetaPeso
+import com.example.app_2.ui.features.perfil_mascota.components.Ubicacion
+import com.example.app_2.ui.features.perfil_mascota.components.boton_2_puntos
+import com.example.app_2.ui.features.perfil_mascota.components.boton_de_like
+import com.example.app_2.ui.features.perfil_mascota.components.boton_retroceder
+import com.example.app_2.ui.features.perfil_mascota.components.nombre_de_mascota
 import com.example.app_2.ui.features.perfil_mascota.viewmodel.PerfilMascotaViewModel
 import com.example.app_2.ui.theme.AppTheme
 
@@ -32,6 +44,7 @@ fun PetPerfilScreen(
 ) {
     val state = viewModel.state
     val pet = state.pet
+    val owner = state.owner
 
     AppTheme {
         Box(
@@ -39,7 +52,7 @@ fun PetPerfilScreen(
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            if (state.isLoading) {
+            if (state.isLoading && pet == null) { // Show loading only on initial load
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             } else if (state.error != null) {
                 Text(
@@ -156,22 +169,16 @@ fun PetPerfilScreen(
                                     .padding(bottom = 16.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Box(
-                                    modifier = Modifier
-                                        .size(50.dp)
-                                        .clip(CircleShape)
-                                        .background(MaterialTheme.colorScheme.secondaryContainer)
-                                        .border(2.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.3f), CircleShape)
-                                ) {
-                                    // Placeholder for owner image
-                                    Image(
-                                        painter = painterResource(id = R.drawable.dcori),
-                                        contentDescription = "Dueño",
-                                        modifier = Modifier.fillMaxSize().clip(CircleShape),
-                                        contentScale = ContentScale.Crop
-                                    )
-                                }
-                                datos_del_dueño(ownerName = pet.ownerName, petName = pet.name, modifier = Modifier.weight(1f).padding(horizontal = 12.dp))
+                                PetOwnerInfo(
+                                    owner = owner,
+                                    petName = pet.name,
+                                    onOwnerClick = {
+                                        // This will navigate to the current user's profile, not the owner's.
+                                        // A proper implementation would pass the owner's ID.
+                                        navController.navigate(AppScreens.PerfilUsuarioScreen.route)
+                                    },
+                                    modifier = Modifier.weight(1f)
+                                )
                                 Boton_mensaje(onClick = { navController.navigate("chat") }, modifier = Modifier.padding(end = 8.dp))
                                 Boton_llamar(onClick = { /* ... */ })
                             }

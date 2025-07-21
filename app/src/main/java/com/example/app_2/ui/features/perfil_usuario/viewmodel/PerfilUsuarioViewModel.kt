@@ -35,6 +35,8 @@ class PerfilUsuarioViewModel @Inject constructor(
         private set
     var showUpdateAddressDialog by mutableStateOf(false)
         private set
+    var showUpdateNameDialog by mutableStateOf(false)
+        private set
 
     init {
         loadUserProfile()
@@ -47,6 +49,9 @@ class PerfilUsuarioViewModel @Inject constructor(
     fun onDismissUpdateAboutMeDialog() { showUpdateAboutMeDialog = false }
     fun onShowUpdateAddressDialog() { showUpdateAddressDialog = true }
     fun onDismissUpdateAddressDialog() { showUpdateAddressDialog = false }
+    fun onShowUpdateNameDialog() { showUpdateNameDialog = true }
+    fun onDismissUpdateNameDialog() { showUpdateNameDialog = false }
+
 
     // --- Data Update Handlers ---
     fun updatePhoneNumber(newPhone: String) {
@@ -61,6 +66,10 @@ class PerfilUsuarioViewModel @Inject constructor(
     fun updateAddress(newAddress: String) {
         updateField("address", newAddress) { user, value -> user.copy(address = value) }
         onDismissUpdateAddressDialog()
+    }
+
+    fun updateName(newName: String) {
+        updateField("name", newName) { user, value -> user.copy(name = value) }
     }
 
     fun updateProfilePicture(uri: Uri) {
@@ -101,12 +110,18 @@ class PerfilUsuarioViewModel @Inject constructor(
             if (currentUser != null) {
                 try {
                     when (fieldName) {
+                        "name" -> userRepository.updateUserName(currentUser.userId, value as String)
                         "phone" -> userRepository.updateUserPhone(currentUser.userId, value as String)
                         "aboutMe" -> userRepository.updateAboutMe(currentUser.userId, value as String)
                         "address" -> userRepository.updateAddress(currentUser.userId, value as String)
                     }
                     _state.value = _state.value.copy(user = updateUser(currentUser, value))
-                    if (fieldName == "phone") onDismissUpdatePhoneDialog()
+                    when (fieldName) {
+                        "name" -> onDismissUpdateNameDialog()
+                        "phone" -> onDismissUpdatePhoneDialog()
+                        "aboutMe" -> onDismissUpdateAboutMeDialog()
+                        "address" -> onDismissUpdateAddressDialog()
+                    }
 
                 } catch (e: Exception) {
                     _state.value = _state.value.copy(error = "Error al actualizar el campo.")
@@ -125,7 +140,7 @@ class PerfilUsuarioViewModel @Inject constructor(
                     if (userProfile == null) {
                         val newUser = User(
                             userId = currentUser.uid,
-                            name = currentUser.displayName ?: "Usuario",
+                            name = currentUser.email?.substringBefore('@') ?: "Usuario",
                             email = currentUser.email ?: "Sin email"
                         )
                         userRepository.createUserProfile(newUser)

@@ -32,6 +32,14 @@ class UserRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun updateUserName(userId: String, name: String) {
+        try {
+            firestore.collection("users").document(userId).update("name", name).await()
+        } catch (e: Exception) {
+            // Log exception or handle error
+        }
+    }
+
     override suspend fun updateUserPhone(userId: String, phone: String) {
         try {
             firestore.collection("users").document(userId).update("phone", phone).await()
