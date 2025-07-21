@@ -36,14 +36,7 @@ import kotlinx.coroutines.delay
 import kotlin.math.roundToInt
 
 @Composable
-fun CargaScreen(navController: NavController) {
-    LaunchedEffect(Unit) {
-        delay(4000)
-        navController.navigate("inicio_screen") {
-            popUpTo("carga_screen") { inclusive = true }
-        }
-    }
-
+fun CargaScreen() {
     AppTheme {
         Box(
             modifier = Modifier
@@ -312,5 +305,5 @@ fun WalkingPet() {
 @Preview(showBackground = true)
 @Composable
 fun LoadingScreenPreview() {
-    CargaScreen(navController = rememberNavController())
+    CargaScreen()
 }

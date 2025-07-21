@@ -29,6 +29,7 @@ import com.example.app_2.ui.features.perfil_mascota.view.PetPerfilScreen
 import com.example.app_2.ui.features.perfil_usuario.view.PantallaPerfilUsuario
 import com.example.app_2.ui.features.perfiles_mascota.view.PerfilesMascotaScreen
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.delay
 
 @Composable
 fun AppNavigation() {
@@ -37,6 +38,7 @@ fun AppNavigation() {
 
     // Determina el destino inicial de forma asíncrona
     LaunchedEffect(Unit) {
+        delay(2000)
         val currentUser = FirebaseAuth.getInstance().currentUser
         startDestination = if (currentUser != null) {
             AppScreens.PrincipalScreen.route
@@ -47,7 +49,7 @@ fun AppNavigation() {
 
     // Muestra un composable de carga mientras se determina el destino
     if (startDestination == null) {
-        CargaScreen(navController = navController) // O un composable de carga genérico
+        CargaScreen() // O un composable de carga genérico
         return
     }
 
@@ -87,9 +89,6 @@ fun AppNavigation() {
         }
         composable(route = AppScreens.RegistrarMascotaScreen.route) {
             RegistrarMascotaScreen(navController = navController)
-        }
-        composable(route = AppScreens.CargaScreen.route) {
-            CargaScreen(navController = navController)
         }
         composable(route = AppScreens.MapaScreen.route) {
             MapaScreen(onBackClick = { navController.popBackStack() })
